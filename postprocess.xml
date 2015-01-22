@@ -1,0 +1,13 @@
+<project name="TradeGWPostProcess">
+
+    <property name="project.home" value="."/>
+    <property name="out" value="${project.home}/out"/>
+    <property name="fix" value="${project.home}/out/fix"/>
+
+    <target name="clear-fix-store" description="Clearing fix store dir">
+        <echo>Clearing fix store dir...</echo>
+        <delete dir="${fix}"/>
+    </target>
+
+
+</project>

@@ -1,0 +1,14 @@
+<component name="libraryTable">
+  <library name="libs">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/mina-core-2.0.7.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/junit-4.5.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/slf4j-jdk14-1.6.3.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/mina-filter-ssl-1.1.7.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/slf4j-api-1.6.3.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/mina-filter-ssl-1.1.2.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
