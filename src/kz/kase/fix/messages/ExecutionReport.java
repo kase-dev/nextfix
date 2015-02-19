@@ -154,20 +154,20 @@ public class ExecutionReport extends Message {
            return isSetField(FixProtocol.FIELD_SECURITY_ID);
        }
    */
-    public ExecutionReport setAccountId(String accId) {
+    public ExecutionReport setAccount(String accId) {
         setString(FixProtocol.FIELD_ACCOUNT, accId);
         return this;
     }
 
-    public String getAccountId() {
+    public String getAccount() {
         return getString(FixProtocol.FIELD_ACCOUNT);
     }
 
-    public boolean hasAccountId() {
+    public boolean hasAccount() {
         return isSetField(FixProtocol.FIELD_ACCOUNT);
     }
 
-    public ExecutionReport setAccOrdName(String name) {
+    /*public ExecutionReport setAccOrdName(String name) {
         setString(FIELD_ACCOUNT_NAME, name);
         return this;
     }
@@ -178,7 +178,7 @@ public class ExecutionReport extends Message {
 
     public boolean hasAccOrdName() {
         return isSetField(FIELD_ACCOUNT_NAME);
-    }
+    }*/
 
    /* public Long getAccountId() {
         return getLong(FixProtocol.FIELD_ACCOUNT);

@@ -79,9 +79,9 @@ public interface Application {
      *            QuickFIX message
      * @param sessionId
      *            QuickFIX session ID
-     * @throws IncorrectDataFormat
-     * @throws IncorrectTagValue
-     * @throws RejectLogon
+     * @throws quickfix.IncorrectDataFormat
+     * @throws quickfix.IncorrectTagValue
+     * @throws quickfix.RejectLogon
      *             causes a logon reject
      */
     void fromAdmin(Message message, SessionID sessionId) throws IncorrectDataFormat,
@@ -103,7 +103,7 @@ public interface Application {
      *            QuickFIX message
      * @param sessionId
      *            QuickFIX session ID
-     * @throws DoNotSend --
+     * @throws quickfix.DoNotSend --
      *             This exception aborts message transmission
      */
     void toApp(Message message, SessionID sessionId) throws DoNotSend;
@@ -127,9 +127,9 @@ public interface Application {
      *            QuickFIX message
      * @param sessionId
      *            QuickFIX session ID
-     * @throws IncorrectDataFormat
-     * @throws IncorrectTagValue
-     * @throws UnsupportedMessageType
+     * @throws quickfix.IncorrectDataFormat
+     * @throws quickfix.IncorrectTagValue
+     * @throws quickfix.UnsupportedMessageType
      */
     void fromApp(Message message, SessionID sessionId) throws IncorrectDataFormat,
             IncorrectTagValue, UnsupportedMessageType;

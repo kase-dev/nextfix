@@ -44,7 +44,7 @@ public class BusinessRejectReasonText  {
      * @param reason the reason
      * @return the description or null if there isn't a description for that reason
      */
-    public static String getMessage(kz.kase.fix.BusinessRejectReason reason) {
+    public static String getMessage(BusinessRejectReason reason) {
         return rejectReasonText.get(reason);
     }
     

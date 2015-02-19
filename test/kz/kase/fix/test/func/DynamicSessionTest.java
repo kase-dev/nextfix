@@ -8,6 +8,7 @@ import kz.kase.fix.messages.Logon;
 import org.junit.Test;
 import quickfix.*;
 import quickfix.logging.LogFactory;
+import quickfix.logging.NextLogFactory;
 import quickfix.logging.ScreenLogFactory;
 import quickfix.mina.acceptor.AbstractSocketAcceptor;
 import quickfix.store.FileStoreFactory;
@@ -58,6 +59,9 @@ public class DynamicSessionTest {
         FixUtils.addSession(settings, login);
 
         MessageStoreFactory storeFactory = new FileStoreFactory(settings);
+        NextLogFactory nextFactory = new NextLogFactory(settings);
+
+
         LogFactory logFactory = new ScreenLogFactory(true, true, true, false);
         MessageFactory mesFactory = new KaseFixMessageFactory();
 

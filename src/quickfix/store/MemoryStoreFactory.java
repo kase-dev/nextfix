@@ -28,7 +28,7 @@ import java.io.IOException;
 /**
  * Creates a message store that stores all data in memory.
  * 
- * @see MessageStore
+ * @see quickfix.store.MessageStore
  */
 public class MemoryStoreFactory implements MessageStoreFactory {
 

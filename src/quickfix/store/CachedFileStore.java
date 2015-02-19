@@ -52,7 +52,7 @@ import quickfix.field.converter.UtcTimestampConverter;
  * File store implementation. THIS CLASS IS PUBLIC ONLY TO MAINTAIN COMPATIBILITY WITH THE QUICKFIX JNI. IT SHOULD ONLY
  * BE CREATED USING A FACTORY.
  *
- * @see CachedFileStoreFactory
+ * @see quickfix.store.CachedFileStoreFactory
  */
 public class CachedFileStore implements MessageStore {
 

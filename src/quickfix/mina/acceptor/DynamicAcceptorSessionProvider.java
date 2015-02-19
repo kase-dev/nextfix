@@ -90,7 +90,7 @@ public class DynamicAcceptorSessionProvider implements AcceptorSessionProvider {
      * @param messageFactory      message factory for the dynamic sessions
      */
     public DynamicAcceptorSessionProvider(final SessionSettings settings,
-                                          final SessionID templateID, quickfix.Application application,
+                                          final SessionID templateID, Application application,
                                           MessageStoreFactory messageStoreFactory, LogFactory logFactory,
                                           MessageFactory messageFactory) {
         this(settings, Collections.singletonList(new TemplateMapping(ANY_SESSION, templateID)),
@@ -110,10 +110,10 @@ public class DynamicAcceptorSessionProvider implements AcceptorSessionProvider {
      * @param messageStoreFactory message store factory for the dynamic sessions
      * @param logFactory          log factory for the dynamic sessions
      * @param messageFactory      message factory for the dynamic sessions
-     * @see TemplateMapping
+     * @see quickfix.mina.acceptor.DynamicAcceptorSessionProvider.TemplateMapping
      */
     public DynamicAcceptorSessionProvider(final SessionSettings settings,
-                                          List<TemplateMapping> templateMappings, quickfix.Application application,
+                                          List<TemplateMapping> templateMappings, Application application,
                                           MessageStoreFactory messageStoreFactory, LogFactory logFactory,
                                           MessageFactory messageFactory) {
         this.settings = settings;

@@ -4,9 +4,8 @@ import kz.kase.fix.FixProtocol;
 import kz.kase.fix.Product;
 import kz.kase.fix.SeсurityStatus;
 
-import java.util.List;
-
-import static kz.kase.fix.FixProtocol.*;
+import static kz.kase.fix.FixProtocol.FIELD_MAX_EXPECT_DATE_IN_DAYS;
+import static kz.kase.fix.FixProtocol.FIELD_SECURITY_DESC;
 
 public class Instrument extends quickfix.MessageComponent {
 
@@ -126,15 +125,13 @@ public class Instrument extends quickfix.MessageComponent {
         return this;
     }
 
-/*
-    public Instrument setCrossCurrency(long currency) {
-        setLong(FixProtocol.FIELD_CROSS_CURRENCY, currency);
+    public Instrument setCrossCurrency(String currency) {
+        setString(FixProtocol.FIELD_CROSS_CURRENCY, currency);
         return this;
     }
-*/
 
-    public Instrument setCounterCurrency(long counterCur) {
-        setLong(FixProtocol.FIELD_COUNTER_CURRENCY, counterCur);
+    public Instrument setCounterCurrency(String counterCur) {
+        setString(FixProtocol.FIELD_COUNTER_CURRENCY, counterCur);
         return this;
     }
 
@@ -192,7 +189,6 @@ public class Instrument extends quickfix.MessageComponent {
     public boolean hasSymbol() {
         return isSetField(FixProtocol.FIELD_SYMBOL);
     }
-
 
 
     public Instrument setSecurityStatus(SeсurityStatus status) {

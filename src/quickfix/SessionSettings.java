@@ -57,13 +57,13 @@ import quickfix.field.converter.BooleanConverter;
  * link for the setting and then and select the "Constant Field Values" link in
  * the detailed field description.
  *
- * @see quickfix.Acceptor
- * @see quickfix.Initiator
+ * @see Acceptor
+ * @see Initiator
  * @see quickfix.logging.FileLogFactory
  * @see quickfix.logging.ScreenLogFactory
  * @see quickfix.store.FileStoreFactory
- * @see quickfix.Session
- * @see quickfix.DefaultSessionFactory
+ * @see Session
+ * @see DefaultSessionFactory
  */
 public class SessionSettings {
 
@@ -118,7 +118,7 @@ public class SessionSettings {
      *
      * @param stream
      *            the input stream
-     * @throws ConfigError
+     * @throws quickfix.ConfigError
      */
     public SessionSettings(InputStream stream) throws ConfigError {
         this();
@@ -130,8 +130,8 @@ public class SessionSettings {
      *
      * @param key
      * @return the default string value
-     * @throws ConfigError
-     * @throws FieldConvertError
+     * @throws quickfix.ConfigError
+     * @throws quickfix.FieldConvertError
      */
     public String getString(String key) throws ConfigError, FieldConvertError {
         return getString(DEFAULT_SESSION_ID, key);
@@ -146,9 +146,9 @@ public class SessionSettings {
      *            the settings key
      * @return the string value for the setting
      *
-     * @throws ConfigError
+     * @throws quickfix.ConfigError
      *             configurion error, probably a missing setting.
-     * @throws FieldConvertError
+     * @throws quickfix.FieldConvertError
      *             error during field type conversion.
      */
     public String getString(SessionID sessionID, String key) throws ConfigError, FieldConvertError {
@@ -165,7 +165,7 @@ public class SessionSettings {
      * @param sessionID
      * @param includeDefaults if true, include settings defaults in properties
      * @return the Properties object with the session settings
-     * @throws ConfigError
+     * @throws quickfix.ConfigError
      * @see java.util.Properties
      */
     public Properties getSessionProperties(SessionID sessionID, boolean includeDefaults)
@@ -189,7 +189,7 @@ public class SessionSettings {
      *
      * @param sessionID
      * @return the Properties object with the session settings
-     * @throws ConfigError
+     * @throws quickfix.ConfigError
      * @see java.util.Properties
      */
     public Properties getSessionProperties(SessionID sessionID) throws ConfigError {
@@ -199,7 +199,7 @@ public class SessionSettings {
     /**
      * Returns the defaults for the session-level settings.
      * @return the default properties
-     * @throws ConfigError
+     * @throws quickfix.ConfigError
      */
     public Properties getDefaultProperties() {
         try {
@@ -215,8 +215,8 @@ public class SessionSettings {
      *
      * @param key
      * @return the default value
-     * @throws ConfigError
-     * @throws FieldConvertError
+     * @throws quickfix.ConfigError
+     * @throws quickfix.FieldConvertError
      */
     public long getLong(String key) throws ConfigError, FieldConvertError {
         return getLong(DEFAULT_SESSION_ID, key);
@@ -231,9 +231,9 @@ public class SessionSettings {
      *            the settings key
      * @return the long integer value for the setting
      *
-     * @throws ConfigError
+     * @throws quickfix.ConfigError
      *             configurion error, probably a missing setting.
-     * @throws FieldConvertError
+     * @throws quickfix.FieldConvertError
      *             error during field type conversion.
      */
     public long getLong(SessionID sessionID, String key) throws ConfigError, FieldConvertError {
@@ -258,8 +258,8 @@ public class SessionSettings {
      *
      * @param key
      * @return the default value
-     * @throws ConfigError
-     * @throws FieldConvertError
+     * @throws quickfix.ConfigError
+     * @throws quickfix.FieldConvertError
      */
     public double getDouble(String key) throws ConfigError, FieldConvertError {
         return getDouble(DEFAULT_SESSION_ID, key);
@@ -274,9 +274,9 @@ public class SessionSettings {
      *            the settings key
      * @return the double number value for the setting
      *
-     * @throws ConfigError
+     * @throws quickfix.ConfigError
      *             configurion error, probably a missing setting.
-     * @throws FieldConvertError
+     * @throws quickfix.FieldConvertError
      *             error during field type conversion.
      */
     public double getDouble(SessionID sessionID, String key) throws ConfigError, FieldConvertError {
@@ -292,8 +292,8 @@ public class SessionSettings {
      *
      * @param key
      * @return the boolean value
-     * @throws ConfigError
-     * @throws FieldConvertError
+     * @throws quickfix.ConfigError
+     * @throws quickfix.FieldConvertError
      */
     public boolean getBool(String key) throws ConfigError, FieldConvertError {
         return getBool(DEFAULT_SESSION_ID, key);
@@ -308,9 +308,9 @@ public class SessionSettings {
      *            the settings key
      * @return the boolean value for the setting
      *
-     * @throws ConfigError
+     * @throws quickfix.ConfigError
      *             configurion error, probably a missing setting.
-     * @throws FieldConvertError
+     * @throws quickfix.FieldConvertError
      *             error during field type conversion.
      */
     public boolean getBool(SessionID sessionID, String key) throws ConfigError, FieldConvertError {

@@ -3,6 +3,7 @@ package kz.kase.fix.test.func;
 import kz.kase.fix.factory.KaseFixMessageFactory;
 import quickfix.*;
 import quickfix.logging.LogFactory;
+import quickfix.logging.NextLogFactory;
 import quickfix.logging.ScreenLogFactory;
 import quickfix.store.FileStoreFactory;
 import quickfix.store.MessageStoreFactory;
@@ -24,7 +25,8 @@ public class QuickFixClient {
         this.settings = settings;
 
         MessageStoreFactory storeFactory = new FileStoreFactory(settings);
-        LogFactory logFactory = new ScreenLogFactory(true, true, true, false);
+
+        LogFactory logFactory = new NextLogFactory(settings);
         MessageFactory mesFactory = new KaseFixMessageFactory();
 
         initiator = new SocketInitiator(clientApp, storeFactory, settings, logFactory, mesFactory);
@@ -42,7 +44,6 @@ public class QuickFixClient {
     public void start() throws ConfigError {
         initiator.start();
     }
-
 
 
     public void logout() {

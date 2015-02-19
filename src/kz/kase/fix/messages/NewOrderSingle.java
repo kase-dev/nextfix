@@ -4,6 +4,7 @@ import kz.kase.fix.FixProtocol;
 import kz.kase.fix.OrderType;
 import kz.kase.fix.Side;
 import kz.kase.fix.TimeInForce;
+import quickfix.Group;
 import quickfix.Message;
 import quickfix.field.StringField;
 
@@ -40,7 +41,7 @@ public class NewOrderSingle extends Message {
         return isSetField(FIELD_REFERENCE);
     }
 
-    public boolean hasOrderRestrictions(){
+    public boolean hasOrderRestrictions() {
         return isSetField(FIELD_ORDER_RESTRICTIONS);
     }
 
@@ -116,17 +117,17 @@ public class NewOrderSingle extends Message {
         return this;
     }
 
-    public NewOrderSingle setAccName(String acc) {
-        setString(FIELD_ACCOUNT_NAME, acc);
+    public NewOrderSingle setAccount(String acc) {
+        setString(FIELD_ACCOUNT, acc);
         return this;
     }
 
-    public String getAccName() {
-        return getString(FIELD_ACCOUNT_NAME);
+    public String getAccount() {
+        return getString(FIELD_ACCOUNT);
     }
 
-    public boolean hasAccName() {
-        return isSetField(FIELD_ACCOUNT_NAME);
+    public boolean hasAccount() {
+        return isSetField(FIELD_ACCOUNT);
     }
 
     public Double getPrice() {
@@ -283,6 +284,55 @@ public class NewOrderSingle extends Message {
 
     public boolean hasSpread() {
         return isSetField(FILED_SPREAD);
+    }
+
+    public static class NoPartyIDs extends Group {
+
+        public NoPartyIDs() {
+            super(FIELD_NO_PARTY_IDS, FIELD_PARTY_ID,
+                    new int[]{
+                            448
+                    });
+        }
+
+        public NoPartyIDs setPartyId(String id) {
+            setString(FixProtocol.FIELD_PARTY_ID, id);
+            return this;
+        }
+
+        public String getPartyId() {
+            return getString(FixProtocol.FIELD_PARTY_ID);
+        }
+
+    }
+
+    public static class NoStipulations extends Group {
+
+        public NoStipulations() {
+            super(FIELD_NO_STIPULATIONS, FIELD_STIPULATION_TYPE,
+                    new int[]{
+                            233, 234
+                    });
+        }
+
+        public NoStipulations setStipulationType(String type) {
+            setString(FixProtocol.FIELD_STIPULATION_TYPE, type);
+            return this;
+        }
+
+        public NoStipulations setStipulationValue(double value) {
+            setDouble(FixProtocol.FIELD_STIPULATION_VALUE, value);
+            return this;
+        }
+
+        public String getStipulationType() {
+            return getString(FixProtocol.FIELD_STIPULATION_TYPE);
+        }
+
+        public String getStipulationValue() {
+            return getString(FixProtocol.FIELD_STIPULATION_VALUE);
+        }
+
     }
 
 }

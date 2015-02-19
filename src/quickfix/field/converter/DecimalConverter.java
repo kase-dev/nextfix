@@ -48,7 +48,7 @@ public class DecimalConverter {
      * Convert a String value to a decimal.
      * @param value the String value to convert
      * @return the parsed BigDecimal
-     * @throws FieldConvertError if the String is not a valid decimal pattern.
+     * @throws quickfix.FieldConvertError if the String is not a valid decimal pattern.
      */
     public static BigDecimal convert(String value) throws FieldConvertError {
         try {

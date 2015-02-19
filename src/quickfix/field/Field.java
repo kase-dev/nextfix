@@ -19,7 +19,10 @@
 
 package quickfix.field;
 
+import org.quickfixj.CharsetSupport;
+
 import java.io.Serializable;
+import java.io.UnsupportedEncodingException;
 
 /**
  * Base class for FIX message fields. This class should be
@@ -53,7 +56,7 @@ public class Field<T> implements Serializable {
      * Gets the field's tag. (QF/C++ compatibility)
      *
      * @return the tag
-     * @see Field#getTag()
+     * @see quickfix.field.Field#getTag()
      */
     public int getField() {
         return getTag();
@@ -116,8 +119,7 @@ public class Field<T> implements Serializable {
         calculate();
         int sum = 0;
 
-/*      todo Исправлена бага (QFJ-631) с расчетом чексум для utf8
-
+//      todo Исправлена бага (QFJ-631) с расчетом чексум для utf8
         byte[] bytes;
         try {
             bytes = this.data.getBytes(CharsetSupport.getCharset());
@@ -127,11 +129,10 @@ public class Field<T> implements Serializable {
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
             return -1;
-        }*/
-
-        for (int i = 0; i < data.length(); i++) {
-            sum += data.charAt(i);
         }
+//        for (int i = 0; i < data.length(); i++) {
+//            sum += data.charAt(i);
+//        }
         return sum + 1;
     }
 

@@ -150,7 +150,7 @@ public class SSLTest {
                 .setTimeInForce(TimeInForce.DAY)
                 .setComment(comment)
                 .setSymbol(symbol)
-                .setAccName(accName)
+                .setAccount(accName)
                 .setMarketMakerType(true)
                 .setSpread(spread)
                 .setDoubleOrderType(true)

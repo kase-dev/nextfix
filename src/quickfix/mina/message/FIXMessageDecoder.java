@@ -372,7 +372,7 @@ public class FIXMessageDecoder implements MessageDecoder {
      * @param file
      * @return a list of extracted messages
      * @throws IOException
-     * @throws ProtocolCodecException
+     * @throws org.apache.mina.filter.codec.ProtocolCodecException
      * @see #extractMessages(File,
      *      quickfix.mina.message.FIXMessageDecoder.MessageListener)
      */
@@ -397,7 +397,7 @@ public class FIXMessageDecoder implements MessageDecoder {
      * @param file
      * @param listener
      * @throws IOException
-     * @throws ProtocolCodecException
+     * @throws org.apache.mina.filter.codec.ProtocolCodecException
      */
     public void extractMessages(File file, final MessageListener listener) throws IOException,
             ProtocolCodecException {

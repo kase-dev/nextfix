@@ -49,7 +49,7 @@ import quickfix.field.converter.UtcTimestampConverter;
  * COMPATIBILITY WITH THE QUICKFIX JNI. IT SHOULD ONLY BE CREATED USING A
  * FACTORY.
  *
- * @see FileStoreFactory
+ * @see quickfix.store.FileStoreFactory
  */
 public class FileStore implements MessageStore, Closeable {
     private static final String READ_OPTION = "r";

@@ -62,16 +62,16 @@ public class OrderCancelRequest extends Message {
 //    }
 
     public OrderCancelRequest setOrderSerial(String serial) {
-        setString(FIELD_ORDER_SERIAL, serial);
+        setString(FIELD_ORDER_ID, serial);
         return this;
     }
 
     public String geOrderSerial() {
-        return getString(FIELD_ORDER_SERIAL);
+        return getString(FIELD_ORDER_ID);
     }
 
     public boolean hasOrderSerial() {
-        return isSetField(FIELD_ORDER_SERIAL);
+        return isSetField(FIELD_ORDER_ID);
     }
 
 //    public boolean hasOrderId() {

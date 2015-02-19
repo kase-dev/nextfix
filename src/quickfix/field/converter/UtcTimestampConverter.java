@@ -65,7 +65,7 @@ public class UtcTimestampConverter extends AbstractDateTimeConverter {
      *
      * @param value the timestamp String
      * @return the parsed timestamp
-     * @throws FieldConvertError raised if timestamp is an incorrect format.
+     * @throws quickfix.FieldConvertError raised if timestamp is an incorrect format.
      */
     public static Date convert(String value) throws FieldConvertError {
         verifyFormat(value);

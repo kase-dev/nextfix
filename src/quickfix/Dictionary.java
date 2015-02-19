@@ -25,7 +25,7 @@ import java.util.Map;
 /**
  * Name/value pairs used for specifying groups of settings.
  *
- * @see SessionSettings
+ * @see quickfix.SessionSettings
  */
 public class Dictionary {
     private String name;

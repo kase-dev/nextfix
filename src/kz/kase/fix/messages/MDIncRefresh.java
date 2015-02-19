@@ -223,8 +223,8 @@ public class MDIncRefresh extends Message {
             return this;
         }
 
-        public NoMDEntries setDealsQtyTotal(long count) {
-            setLong(FIELD_DEALS_QTY_TOTAL, count);
+        public NoMDEntries setDealsQtyTotal(String count) {
+            setString(FIELD_DEALS_QTY_TOTAL, count);
             return this;
         }
 

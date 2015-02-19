@@ -15,7 +15,7 @@ public class DayPositionReport extends Message {
     public DayPositionReport() {
         super(new int[]{
                 FIELD_REF_TAG_ID,
-                FIELD_ACCOUNT_NAME,
+                FIELD_ACCOUNT,
                 FIELD_MEMBER_NAME,
                 FIELD_PRODUCT
         });
@@ -35,8 +35,8 @@ public class DayPositionReport extends Message {
         return isSetField(FIELD_MEMBER_NAME);
     }
 
-    public DayPositionReport setAccName(String acc) {
-        setString(FIELD_ACCOUNT_NAME, acc);
+    public DayPositionReport setAccount(String acc) {
+        setString(FIELD_ACCOUNT, acc);
         return this;
     }
 
@@ -66,12 +66,12 @@ public class DayPositionReport extends Message {
         return isSetField(FIELD_REF_TAG_ID);
     }
 
-    public String getAccName() {
-        return getString(FIELD_ACCOUNT_NAME);
+    public String getAccount() {
+        return getString(FIELD_ACCOUNT);
     }
 
-    public boolean hasAccName() {
-        return isSetField(FIELD_ACCOUNT_NAME);
+    public boolean hasAccount() {
+        return isSetField(FIELD_ACCOUNT);
     }
 
     public int getPositionsCount() {

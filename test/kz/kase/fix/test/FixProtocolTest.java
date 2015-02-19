@@ -60,6 +60,18 @@ public class FixProtocolTest {
         String comment = "Tralala";
         double spread = 3.4D;
 
+        double risk = 3.0;
+
+        NewOrderSingle.NoPartyIDs partyIDs = new NewOrderSingle.NoPartyIDs();
+
+        String counter_party = "COUNTER_PARTY";
+        partyIDs.setPartyId(counter_party);
+
+        NewOrderSingle.NoStipulations repoRisk = new NewOrderSingle.NoStipulations();
+
+        repoRisk.setStipulationType("PROTECT");
+        repoRisk.setStipulationValue(risk);
+
         NewOrderSingle order = new NewOrderSingle()
                 .setRef(ref)
                 .setOrderType(OrderType.LIMIT)
@@ -69,13 +81,15 @@ public class FixProtocolTest {
                 .setTimeInForce(TimeInForce.DAY)
                 .setComment(comment)
                 .setSymbol(symbol)
-                .setAccName(accName)
+                .setAccount(accName)
                 .setOrderRestrictions(orderRestr)
                 .setMarketMakerType(true)
                 .setSpread(spread)
                 .setDoubleOrderType(true)
                 .setPriceType(OrderPriceType.AVERAGE_PRICE);
 
+        order.addGroupRef(partyIDs);
+        order.addGroupRef(repoRisk);
 
         prepareHeaders(order);
         String fixMes = order.toString();
@@ -93,14 +107,17 @@ public class FixProtocolTest {
         assertEquals(side, restored.getSide());
         assertEquals(TimeInForce.DAY, restored.getTimeInForce());
         assertEquals(comment, restored.getComment());
-        assertEquals(accName, restored.getAccName());
+        assertEquals(accName, restored.getAccount());
         assertEquals(symbol, restored.getSymbol());
         assertEquals(true, restored.isMarketMakerType().booleanValue());
         assertEquals(spread, restored.getSpread());
         assertEquals(true, restored.isDoubleOrderType());
         assertEquals(orderRestr, restored.getOrderRestrictions());
         assertEquals(OrderPriceType.AVERAGE_PRICE, restored.getPriceType().intValue());
-
+        assertEquals(counter_party,
+                restored.getGroups(FIELD_NO_PARTY_IDS).get(0).getString(FIELD_PARTY_ID));
+        assertEquals(risk,
+                restored.getGroups(FIELD_NO_STIPULATIONS).get(0).getDouble(FIELD_STIPULATION_VALUE));
 
         dictionary.validate(restored);
     }
@@ -111,9 +128,11 @@ public class FixProtocolTest {
         int orderQty = 1500;
         String symbol = "KZTK";
         long ref = 3434L;
+        String orderSerial = "NF_3343453";
         order.setOrderQty(orderQty)
                 .setSymbol(symbol)
-                .setRef(ref);
+                .setRef(ref)
+                .setOrderSerial(orderSerial);
 
         prepareHeaders(order);
         String fixMes = order.toString();
@@ -127,6 +146,7 @@ public class FixProtocolTest {
         assertEquals(symbol, restored.getSymbol());
         assertEquals(orderQty, restored.getOrderQty());
         assertEquals(ref, restored.getRef().longValue());
+        assertEquals(orderSerial, restored.geOrderSerial());
 
         dictionary.validate(restored);
     }
@@ -173,7 +193,7 @@ public class FixProtocolTest {
         ExecutionReport report = new ExecutionReport()
                 .setExecType(execType)
                 .setTimeInForce(TimeInForce.FILL_OR_KILL)
-                .setAccountId(accId)
+                .setAccount(accId)
                 .setTradeSessionId(sesNum)
                 .setTradeSessionSubId(sessionSubId)
                 .setExecId(dealSeraial)
@@ -187,7 +207,7 @@ public class FixProtocolTest {
                 .setOrderType(orderType)
                 .setOrderStatus(orderStatus)
                 .setSide(side)
-                .setAccOrdName(accOrdName)
+//                .setAccOrdName(accOrdName)
                 .setPrice(price)
                 .setMemberName(memberName)
                 .setQty(qty)
@@ -227,7 +247,7 @@ public class FixProtocolTest {
         assertEquals(sesNum, restored.getSessionId());
         assertEquals(sessionSubId, restored.getTradeSessionSubId());
         assertEquals(orderSerial, restored.getOrderId());
-        assertEquals(accId, restored.getAccountId());
+        assertEquals(accId, restored.getAccount());
 
         assertEquals(cumQty, restored.getCumQty().intValue());
         assertEquals(operator, restored.getWhoRemoved());
@@ -240,7 +260,7 @@ public class FixProtocolTest {
         assertEquals(sellOrderSerial, restored.getSellOrderSerial());
         assertEquals(sellUserName, restored.getSellUserName());
         assertEquals(memberName, restored.getMemberName());
-        assertEquals(accOrdName, restored.getAccOrdName());
+//        assertEquals(accOrdName, restored.getAccOrdName());
         assertEquals(orderStatus, restored.getOrderStatus());
         assertEquals("PISIA", restored.getUserName());
         assertEquals(side, restored.getSide());
@@ -342,6 +362,48 @@ public class FixProtocolTest {
         assertEquals(opened, restored.getTrSesSubID());
         assertEquals(symbol, restored.getSymbol());
         assertEquals(sessionID, restored.getTradingSessionID());
+    }
+
+    @Test
+    public void testPositionTransferInstruction() throws InvalidMessage, IncorrectTagValue, IncorrectDataFormat {
+
+        PositionTransferInstruction positionTransferInstruction
+                = new PositionTransferInstruction();
+
+        String account = "0001";
+        String symbol = "USDKZT";
+        String currency = "USD";
+        Double position = 1000000.0;
+
+        positionTransferInstruction.setRef(1);
+
+        PositionTransferInstruction.NoTargetPartyIDs noTargetPartyIDs
+                = new PositionTransferInstruction.NoTargetPartyIDs();
+
+        noTargetPartyIDs.setTargetPartyID(account);
+
+        NoPositions noPositions
+                = new NoPositions();
+
+        noPositions.setDouble(FIELD_LONG_QTY, position);
+        noPositions.setPosType(PositionType.AllocationTradeQty);
+
+        positionTransferInstruction.addGroupRef(noPositions);
+        positionTransferInstruction.addGroupRef(noTargetPartyIDs);
+
+        prepareHeaders(positionTransferInstruction);
+        String fixMess = positionTransferInstruction.toString();
+        System.out.println("fixMess: " + fixMess);
+
+        PositionTransferInstruction restored =
+                (PositionTransferInstruction) MessageUtils.parse(factory, dictionary, fixMess);
+
+        assertNull(restored.getException() != null ?
+                        restored.getException().getMessage() : "",
+                restored.getException()
+        );
+
+        dictionary.validate(restored);
     }
 
     @Test
@@ -853,11 +915,14 @@ public class FixProtocolTest {
         int tradeReqType = 4;
         String symbol = "KZTK";
 
+        Date fromDate = new Date();
+        Date tillDate = new Date();
         TradeCaptureReportRequest request = new TradeCaptureReportRequest()
                 .setTradeReqId(tradeReqId)
                 .setTradeReqType(tradeReqType)
                 .setSymbol(symbol)
-                .setDatedDate(new Date());
+                .setFromDate(fromDate)
+                .setTillDate(tillDate);
 
 
         prepareHeaders(request);
@@ -870,6 +935,8 @@ public class FixProtocolTest {
 
         assertEquals(tradeReqId, restored.getReportReqId());
         assertEquals(symbol, restored.getSymbol());
+        assertEquals(fromDate.getDay(), restored.getFromDate().getDay());
+        assertEquals(tillDate.getDay(), restored.getTillDate().getDay());
         assertEquals(tradeReqType, restored.getReportReqType().intValue());
 
         dictionary.validate(restored);
@@ -1016,7 +1083,7 @@ public class FixProtocolTest {
 
         DayPositionReport report = new DayPositionReport()
                 .setRef(ref)
-                .setAccName(accName)
+                .setAccount(accName)
                 .setMemberName(memberName);
 
 
@@ -1039,7 +1106,7 @@ public class FixProtocolTest {
 
         DayPositionReport restored = (DayPositionReport) MessageUtils.parse(factory, dictionary, fixMes);
 
-        assertEquals(restored.getAccName(), accName);
+        assertEquals(restored.getAccount(), accName);
         assertEquals(restored.getMemberName(), memberName);
         assertEquals(restored.getRef().longValue(), ref);
 //        assertEquals(restored.getSettDate().getTime(), sttDate.getTime());
@@ -1145,6 +1212,8 @@ public class FixProtocolTest {
         baseRules.setMaxPriceVariation(maxPriceVar);
         baseRules.setTradingCurrency(crossCurr);
 
+        String crossCur = "USD";
+        String counterCur = "KZT";
         Instrument instr = new Instrument()
                 .setProduct(product)
                 .setSymbol("I0001")
@@ -1155,7 +1224,9 @@ public class FixProtocolTest {
                 .setDevLimitMarketPrc(5.5)
                 .setCurrentSession(1)
                 .setPriceStep(2.0)
-                .setDevLimitPrcAvg(5);
+                .setDevLimitPrcAvg(5)
+                .setCrossCurrency(crossCur)
+                .setCounterCurrency(counterCur);
 
         list.addGroupRef(new SecurityList.NoRelatedSym()
                         .addNoTIFRules(tifRules)
@@ -1253,6 +1324,8 @@ public class FixProtocolTest {
         assertEquals(LOT, noRelaySym.getInt(FIELD_ROUND_LOT));
 
         assertEquals("I0001", noRelaySym.getString(FixProtocol.FIELD_SYMBOL));
+        assertEquals(crossCur, noRelaySym.getString(FIELD_CROSS_CURRENCY));
+        assertEquals(counterCur, noRelaySym.getString(FIELD_COUNTER_CURRENCY));
         assertEquals(product.getValue(), noRelaySym.getInt(FIELD_PRODUCT));
 
         assertEquals(30000, noRelaySym.getInt(FixProtocol.FIELD_NOMINAL_VALUE));

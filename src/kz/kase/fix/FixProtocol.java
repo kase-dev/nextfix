@@ -16,6 +16,7 @@ public interface FixProtocol {
     String MESSAGE_POS_REPORT = "AP";
     String MESSAGE_ARC_POS_REQUEST = "ACP";
     String MESSAGE_DAY_POS_REPORT = "DP";
+    String MESSAGE_POS_TRANSFER_INSTRUCTION = "DL";
     String MESSAGE_NEW_ORDER_SINGLE = "D";
     String MESSAGE_ORDER_CANCEL_REQUEST = "F";
     String MESSAGE_BUSINESS_MESSAGE_REJECT = "j";
@@ -111,6 +112,10 @@ public interface FixProtocol {
     int FIELD_SECURITY_TYPE = 167;
     int FIELD_EFFECTIVE_TIME = 168;
     int FILED_SPREAD = 218;
+    int FIELD_NO_STIPULATIONS = 232;
+    int FIELD_STIPULATION_TYPE = 233;
+    int FIELD_STIPULATION_VALUE = 234;
+
 
     int FILED_YIELD = 236;
 
@@ -147,8 +152,9 @@ public interface FixProtocol {
     int FIELD_PRICE_TYPE = 423;
     int FIELD_EXPIRE_DATE = 432;
 
-    int FIELD_ACCOUNT_NAME = 448;
+    int FIELD_PARTY_ID = 448;
     int FIELD_NET_CHG_PREV_DAY = 451;
+    int FIELD_NO_PARTY_IDS = 453;
     int FIELD_PRODUCT = 460;
     int FIELD_CFI_CODE = 461;
 
@@ -204,6 +210,7 @@ public interface FixProtocol {
     int FIELD_INSTR_ATTRIB_VALUE = 872;
 
     int FIELD_DATED_DATE = 873;
+    int FIELD_TILL_DATE = 874;
 
     int FIELD_LAST_FRAGMENT = 893;
 
@@ -237,7 +244,9 @@ public interface FixProtocol {
     int FIELD_TRADING_CURRENCY = 1245;
 
     int FIELD_NO_TRADING_SESSION_RULES = 1309;
-
+    int FIELD_NO_TARGET_PARTIES = 1461;
+    int FIELD_TARGET_PARTY_ID = 1462;
+    int FIELD_TRANSFER_INSTRUCTION_ID = 2436;
 
 //------------- Extended fields -----------------
 

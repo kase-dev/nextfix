@@ -269,7 +269,7 @@ public class SecurityList extends Message {
         }
     }
 
-    public static class NoOrdTypeRules extends quickfix.Group {
+    public static class NoOrdTypeRules extends Group {
 
 
         public NoOrdTypeRules() {
@@ -324,7 +324,7 @@ public class SecurityList extends Message {
 
     }
 
-    public static class NoTimeInForceRules extends quickfix.Group {
+    public static class NoTimeInForceRules extends Group {
 
 
         public NoTimeInForceRules() {

@@ -54,17 +54,31 @@ public class TradeCaptureReportRequest extends Message {
         return isSetField(FIELD_SYMBOL);
     }
 
-    public TradeCaptureReportRequest setDatedDate(Date date) {
+    public TradeCaptureReportRequest setFromDate(Date date) {
         setUtcDateOnly(FIELD_DATED_DATE, date);
         return this;
     }
 
-    public Date getDatedDate() {
+    public Date getFromDate() {
         return getUtcDateOnly(FIELD_DATED_DATE);
     }
 
     public boolean hasDatedDate() {
         return isSetField(FIELD_DATED_DATE);
     }
+
+    public TradeCaptureReportRequest setTillDate(Date date) {
+        setUtcDateOnly(FIELD_TILL_DATE, date);
+        return this;
+    }
+
+    public Date getTillDate() {
+        return getUtcDateOnly(FIELD_TILL_DATE);
+    }
+
+    public boolean hasTillDate() {
+        return isSetField(FIELD_TILL_DATE);
+    }
+
 
 }

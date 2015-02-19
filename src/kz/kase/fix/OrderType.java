@@ -17,6 +17,7 @@ public enum OrderType implements CharItem {
 //   PREVIOUSLY_INDICATED('E'),
 //   FOREX_LIMIT('F'),
     FOREX_SWAP('G'),
+    REPO('R')
 //   FOREX_PREVIOUSLY_QUOTED('H'),
 //   FUNARI('I'),
 //   MARKET_IF_TOUCHED('J'),

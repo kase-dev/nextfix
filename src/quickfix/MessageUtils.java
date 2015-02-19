@@ -98,7 +98,7 @@ public class MessageUtils {
      * @param dataDictionary
      * @param messageString
      * @return the parsed message
-     * @throws InvalidMessage
+     * @throws quickfix.InvalidMessage
      */
     public static Message parse(MessageFactory messageFactory, DataDictionary dataDictionary,
                                 String messageString) throws InvalidMessage {
@@ -108,7 +108,7 @@ public class MessageUtils {
         }
         final String beginString = messageString.substring(2, index);
         final String messageType = getMessageType(messageString);
-        final quickfix.Message message = messageFactory.create(beginString, messageType);
+        final Message message = messageFactory.create(beginString, messageType);
         message.fromString(messageString, dataDictionary, dataDictionary != null);
         return message;
     }
@@ -119,7 +119,7 @@ public class MessageUtils {
      * @param session       - the Session that will process the message
      * @param messageString
      * @return the parsed message
-     * @throws InvalidMessage
+     * @throws quickfix.InvalidMessage
      */
     public static Message parse(Session session, String messageString) throws InvalidMessage {
         final String beginString = getStringField(messageString, FixProtocol.FIELD_BEGIN_STRING);
@@ -143,7 +143,7 @@ public class MessageUtils {
                 ddProvider == null ? null :
                         ddProvider.getApplicationDataDictionary(applVerID);
 
-        final quickfix.Message message = messageFactory.create(beginString, msgType);
+        final Message message = messageFactory.create(beginString, msgType);
         final DataDictionary payloadDictionary =
                 MessageUtils.isAdminMessage(msgType) ?
                         sessionDataDictionary :
@@ -257,8 +257,8 @@ public class MessageUtils {
      *
      * @param applVerID
      * @return the begin string for the specified ApplVerID.
-     * @throws QFJException if conversion fails.
-     * @see ApplVerID
+     * @throws org.quickfixj.QFJException if conversion fails.
+     * @see kz.kase.fix.ApplVerID
      */
     public static String toBeginString(ApplVerID applVerID) throws QFJException {
         final String beginString = applVerIDtoBeginString.get(applVerID);
@@ -286,8 +286,8 @@ public class MessageUtils {
      *
      * @param beginString
      * @return the ApplVerID for the specified begin string.
-     * @throws QFJException if conversion fails.
-     * @see FixVersions
+     * @throws org.quickfixj.QFJException if conversion fails.
+     * @see quickfix.FixVersions
      */
     public static ApplVerID toApplVerID(String beginString) throws QFJException {
         final ApplVerID applVerID = beginStringToApplVerID.get(beginString);

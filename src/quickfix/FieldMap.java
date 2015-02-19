@@ -45,6 +45,9 @@ public abstract class FieldMap implements Serializable {
     public static final BigDecimal DEFAULT_DECIMAL = BigDecimal.ZERO;
     public static final Date DEFAULT_DATE = new Date(0);
 
+    char delimiter = '\001';
+
+
     private final int[] fieldOrder;
 
     private final TreeMap<Integer, Field<?>> fields;
@@ -64,6 +67,10 @@ public abstract class FieldMap implements Serializable {
 
     public int[] getFieldOrder() {
         return fieldOrder;
+    }
+
+    public void setDelimiter(char ch) {
+        delimiter = ch;
     }
 
     public void clear() {
@@ -378,7 +385,7 @@ public abstract class FieldMap implements Serializable {
                 final Field<?> field = getField(preField, null);
                 if (field != null) {
                     field.toString(builder);
-                    builder.append('\001');
+                    builder.append(delimiter);
                 }
             }
         }
@@ -388,12 +395,12 @@ public abstract class FieldMap implements Serializable {
             if (!isOrderedField(tag, preFields) && !isOrderedField(tag, postFields)
                     && !isGroupField(tag)) {
                 field2.toString(builder);
-                builder.append('\001');
+                builder.append(delimiter);
             } else if (isGroupField(tag) && isOrderedField(tag, fieldOrder)
                     && getGroupCount(tag) > 0) {
                 final List<Group> groups = getGroups(tag);
                 field2.toString(builder);
-                builder.append('\001');
+                builder.append(delimiter);
                 for (Group group : groups) {
                     group.calculateString(builder, preFields, postFields);
                 }
@@ -408,7 +415,7 @@ public abstract class FieldMap implements Serializable {
                 if (groupCount > 0) {
                     final IntField countField = new IntField(groupCountTag.intValue(), groupCount);
                     countField.toString(builder);
-                    builder.append('\001');
+                    builder.append(delimiter);
                     for (Group group : groups) {
                         group.calculateString(builder, preFields, postFields);
                     }
@@ -420,7 +427,7 @@ public abstract class FieldMap implements Serializable {
             for (final int postField : postFields) {
                 final Field<?> field = getField(postField, null);
                 field.toString(builder);
-                builder.append('\001');
+                builder.append(delimiter);
             }
         }
     }

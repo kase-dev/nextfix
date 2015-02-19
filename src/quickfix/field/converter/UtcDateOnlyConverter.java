@@ -56,7 +56,7 @@ public class UtcDateOnlyConverter extends AbstractDateTimeConverter {
      * Convert between a String and a date
      * @param value the String to convert
      * @return the parsed Date
-     * @throws FieldConvertError raised for an invalid date string.
+     * @throws quickfix.FieldConvertError raised for an invalid date string.
      */
     public static Date convert(String value) throws FieldConvertError {
         Date d = null;

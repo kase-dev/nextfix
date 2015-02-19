@@ -15,7 +15,8 @@ public enum Product implements IntItem {
     MUNICIPAL(11),
     OTHER(12),
     FINANCING(13),
-    DERIVATIVE(14);
+    FUNDS(14),
+    DERIVATIVE(15);
 
     private final int value;
 

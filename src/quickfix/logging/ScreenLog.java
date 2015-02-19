@@ -29,7 +29,7 @@ import quickfix.field.converter.UtcTimestampConverter;
  * Screen log implementation. THIS CLASS IS PUBLIC ONLY TO MAINTAIN COMPATIBILITY WITH THE QUICKFIX JNI. IT SHOULD ONLY
  * BE CREATED USING A FACTORY.
  * 
- * @see ScreenLogFactory
+ * @see quickfix.logging.ScreenLogFactory
  */
 public class ScreenLog extends AbstractLog {
 

@@ -86,7 +86,7 @@ public class DoubleConverter {
      * Convert a String value to a double.
      * @param value the String value to convert
      * @return the parsed double
-     * @throws FieldConvertError if the String is not a valid double pattern.
+     * @throws quickfix.FieldConvertError if the String is not a valid double pattern.
      */
     public static double convert(String value) throws FieldConvertError {
         try {

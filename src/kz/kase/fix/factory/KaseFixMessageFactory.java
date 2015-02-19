@@ -106,6 +106,9 @@ public class KaseFixMessageFactory implements MessageFactory {
         } else if (FixProtocol.MESSAGE_ORDER_STATUS_REQUEST.equals(msgType)) {
             return new OrderStatusRequest();
 
+        } else if (FixProtocol.MESSAGE_POS_TRANSFER_INSTRUCTION.equals(msgType)) {
+            return new PositionTransferInstruction();
+
         }
 
         System.err.println("Unknown message type: '" + msgType + "'");
