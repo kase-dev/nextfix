@@ -601,6 +601,13 @@
             <field name="EncodedText" required="N"/>
             <component name="Instrument" required="N"/>
         </message>
+        <message name="PositionTransferInstruction" msgtype="DL" msgcat="app">
+            <field name="TransferInstructionID" required="Y"/>
+            <component name="TargetParties" required="Y"/>
+            <field name="Symbol" required="N"/>
+            <component name="PositionQty" required="N"/>
+            <field name="Currency" required="N"/>
+        </message>
         <message name="NewOrderSingle" msgtype="D" msgcat="app">
             <field name="ClOrdID" required="Y"/>
             <field name="SecondaryClOrdID" required="N"/>
@@ -608,7 +615,7 @@
             <component name="Parties" required="N"/>
             <field name="TradeOriginationDate" required="N"/>
             <field name="TradeDate" required="N"/>
-            <field name="Account" required="N"/>
+            <field name="Account" required="Y"/>
             <field name="AcctIDSource" required="N"/>
             <field name="AccountType" required="N"/>
             <field name="DayBookingInst" required="N"/>
@@ -700,7 +707,7 @@
             <field name="PriceType" required="N"/>
             <field name="DoubleOrder" required="N"/>
             <field name="Symbol" required="Y"/>
-            <field name="PartyID" required="Y"/>
+            <!--<field name="PartyID" required="Y"/>-->
         </message>
         <message name="ExecutionReport" msgtype="8" msgcat="app">
             <field name="OrderID" required="N"/>
@@ -874,7 +881,7 @@
             <field name="SellAcc" required="N"/>
             <field name="SellOrderSerial" required="N"/>
             <field name="MemberName" required="N"/>
-            <field name="PartyID" required="N"/>
+            <!--<field name="PartyID" required="N"/>-->
             <field name="Symbol" required="N"/>
             <field name="DealSerial" required="N"/>
             <field name="NextTimeInForces" required="N"/>
@@ -2202,7 +2209,8 @@
         </message>
         <message name="DayPositionReport" msgtype="DP" msgcat="app">
             <field name="RefTagID" required="N"/>
-            <field name="PartyID" required="Y"/>
+            <!--<field name="PartyID" required="Y"/>-->
+            <field name="Account" required="Y"/>
             <field name="MemberName" required="N"/>
             <field name="Product" required="N"/>
             <component name="PosDayGrp" required="N"/>
@@ -3116,6 +3124,11 @@
                 <field name="PosQtyStatus" required="N"/>
                 <component name="NestedParties"/>
                 <field name="QuantityDate" required="N"/>
+            </group>
+        </component>
+        <component name="TargetParties">
+            <group name="NoTargetPartyIDs" required="N">
+                <field name="TargetPartyID" required="N"/>
             </group>
         </component>
         <component name="SettlInstructionsData">
@@ -4891,6 +4904,7 @@
             <value enum="B" description="NEWS"/>
             <value enum="C" description="EMAIL"/>
             <value enum="D" description="ORDER_SINGLE"/>
+            <value enum="DL" description="POSITION_TRANSFER_INSTRUCTION"/>
             <value enum="E" description="ORDER_LIST"/>
             <value enum="F" description="ORDER_CANCEL_REQUEST"/>
             <value enum="G" description="ORDER_CANCEL_REPLACE_REQUEST"/>
@@ -5036,6 +5050,7 @@
             <value enum="M" description="NEXT_FUND_VALUATION_POINT"/>
             <value enum="P" description="PEGGED"/>
             <value enum="Q" description="COUNTER_ORDER_SELECTION"/>
+            <value enum="R" description="REPO"/>
         </field>
         <field number="41" name="OrigClOrdID" type="STRING"/>
         <field number="42" name="OrigTime" type="UTCTIMESTAMP"/>
@@ -5704,22 +5719,7 @@
             <value enum="WHOLE" description="WHOLE_POOL"/>
             <value enum="YIELD" description="YIELD_RANGE"/>
         </field>
-        <field number="234" name="StipulationValue" type="STRING">
-            <value enum="CD" description="SPECIAL_CUM_DIVIDEND"/>
-            <value enum="XD" description="SPECIAL_EX_DIVIDEND"/>
-            <value enum="CC" description="SPECIAL_CUM_COUPON"/>
-            <value enum="XC" description="SPECIAL_EX_COUPON"/>
-            <value enum="CB" description="SPECIAL_CUM_BONUS"/>
-            <value enum="XB" description="SPECIAL_EX_BONUS"/>
-            <value enum="CR" description="SPECIAL_CUM_RIGHTS"/>
-            <value enum="XR" description="SPECIAL_EX_RIGHTS"/>
-            <value enum="CP" description="SPECIAL_CUM_CAPITAL_REPAYMENTS"/>
-            <value enum="XP" description="SPECIAL_EX_CAPITAL_REPAYMENTS"/>
-            <value enum="CS" description="CASH_SETTLEMENT"/>
-            <value enum="SP" description="SPECIAL_PRICE"/>
-            <value enum="TR" description="REPORT_FOR_EUROPEAN_EQUITY_MARKET_SECURITIES"/>
-            <value enum="GD" description="GUARANTEED_DELIVERY"/>
-        </field>
+        <field number="234" name="StipulationValue" type="FLOAT" />
         <field number="235" name="YieldType" type="STRING">
             <value enum="AFTERTAX" description="AFTER_TAX_YIELD"/>
             <value enum="ANNUAL" description="ANNUAL_YIELD"/>
@@ -8556,8 +8556,9 @@
         <field number="1239" name="NoTimeInForceRules" type="INT"/>
 
         <field number="1309" name="NoTradingSessionRules" type="INT"/>
-
-
+        <field number="1461" name="NoTargetPartyIDs" type="INT"/>
+        <field number="1462" name="TargetPartyID" type="STRING"/>
+        <field number="2436" name="TransferInstructionID" type="STRING"/>
         <field number="5450" name="MDElementName" type="INT">
             <value enum="1" description="BEST_BID"/>
             <value enum="2" description="BEST_OFFER"/>
@@ -8604,8 +8605,8 @@
         <field number="5041" name="InstrWarnDevAvgPrc" type="FLOAT"/>
         <field number="5042" name="InstrWarnDevBestBuyPrc" type="FLOAT"/>
         <field number="5043" name="InstrWarnDevBestSellPrc" type="FLOAT"/>
-        <field number="5044" name="InstrCrossCurrency" type="INT"/>
-        <field number="5045" name="InstrCounterCurrency" type="INT"/>
+        <field number="5044" name="InstrCrossCurrency" type="STRING"/>
+        <field number="5045" name="InstrCounterCurrency" type="STRING"/>
         <field number="5046" name="InstrPricePrecision" type="INT"/>
         <field number="5047" name="InstrPriceStep" type="FLOAT"/>
 
@@ -8617,7 +8618,7 @@
 
         <field number="5067" name="DealsCount" type="INT"/>
         <field number="5068" name="DealsVolume" type="FLOAT"/>
-        <field number="5069" name="DealsQtyTotal" type="INT"/>
+        <field number="5069" name="DealsQtyTotal" type="STRING"/>
 
         <field number="5089" name="ChartRequestRef" type="STRING"/>
         <field number="5090" name="ChartInstrId" type="INT"/>
