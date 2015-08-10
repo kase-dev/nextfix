@@ -26,17 +26,17 @@ public class PositionTransferInstruction extends Message {
     }
 
     public PositionTransferInstruction setToAccount(String account) {
-        setString(FIELD_TRANSFER_INSTRUCTION_ID, account);
+        setString(FIELD_TARGET_ACCOUNT, account);
         return this;
     }
 
     public PositionTransferInstruction setRef(long ref) {
-        setField(new StringField(FIELD_TRANSFER_INSTRUCTION_ID, Long.toString(ref)));
+        setField(new StringField(FIELD_TRANSFER_ID, Long.toString(ref)));
         return this;
     }
 
     public Long getRef() {
-        return getLong(FIELD_TRANSFER_INSTRUCTION_ID);
+        return getLong(FIELD_TRANSFER_ID);
     }
 
     public PositionTransferInstruction setSymbol(String symbol) {
@@ -45,7 +45,7 @@ public class PositionTransferInstruction extends Message {
     }
 
     public String getToAccount() {
-        return getString(FIELD_TRANSFER_INSTRUCTION_ID);
+        return getString(FIELD_TARGET_ACCOUNT);
     }
 
     public String getSymbol() {

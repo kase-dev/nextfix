@@ -293,6 +293,7 @@ public interface FixProtocol {
     int FIELD_NO_TARGET_PARTIES = 1461;
     int FIELD_TARGET_PARTY_ID = 1462;
     int FIELD_TRANSFER_INSTRUCTION_ID = 2436;
+    int FIELD_TRANSFER_ID = 2437;
 
     int FIELD_TRANSFER_STATUS = 2442;
 //------------- Extended fields -----------------
@@ -472,6 +473,7 @@ public interface FixProtocol {
 
     int FIELD_MESSAGE = 5204;
     int FIELD_LAST_DEAL_DATE = 5205;
+    int FIELD_TARGET_ACCOUNT = 5206;
 
     int FIELD_PAYMENT_STREAM_DISCOUNT_RATE_DAY_COUNT = 40746;
     int PAYMENT_STREAM_MARKET_RATE = 40739;
