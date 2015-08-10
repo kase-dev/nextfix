@@ -604,7 +604,8 @@
             <component name="Instrument" required="N"/>
         </message>
         <message name="PositionTransferInstruction" msgtype="DL" msgcat="app">
-            <field name="TransferInstructionID" required="Y"/>
+            <field name="TransferID" required="N"/>
+            <field name="TargetAccount" required="N"/>
             <component name="TargetParties" required="N"/>
             <field name="Symbol" required="N"/>
             <field name="Account" required="N"/>
@@ -612,7 +613,7 @@
             <field name="Currency" required="N"/>
         </message>
         <message name="PositionTransferReport" msgtype="DN" msgcat="app">
-            <field name="TransferInstructionID" required="Y"/>
+            <field name="TransferID" required="N"/>
             <field name="TransferStatus" required="N"/>
         </message>
         <message name="NewOrderSingle" msgtype="D" msgcat="app">
@@ -8596,6 +8597,7 @@
         <field number="1461" name="NoTargetPartyIDs" type="INT"/>
         <field number="1462" name="TargetPartyID" type="STRING"/>
         <field number="2436" name="TransferInstructionID" type="STRING"/>
+        <field number="2437" name="TransferID" type="LONG"/>
         <field number="2442" name="TransferStatus" type="INT"/>
         <field number="5450" name="MDElementName" type="INT">
             <value enum="1" description="BEST_BID"/>
@@ -8796,6 +8798,7 @@
         <field number="5189" name="RefSesId" type="STRING"/>
         <field number="5204" name="Message" type="STRING"/>
         <field number="5205" name="LastDealDate" type="UTCTIMESTAMP"/>
+        <field number="5206" name="TargetAccount" type="STRING"/>
 
         <!--Futures-->
         <field number="5190" name="IsFuture" type="BOOLEAN"/>

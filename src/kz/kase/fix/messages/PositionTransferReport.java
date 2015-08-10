@@ -38,11 +38,11 @@ public class PositionTransferReport extends Message {
     }
 
     public long getRef() {
-        return getLong(FIELD_TRANSFER_INSTRUCTION_ID);
+        return getLong(FIELD_TRANSFER_ID);
     }
 
     public PositionTransferReport setRef(long ref) {
-        setLong(FIELD_TRANSFER_INSTRUCTION_ID, ref);
+        setLong(FIELD_TRANSFER_ID, ref);
         return this;
     }
 
