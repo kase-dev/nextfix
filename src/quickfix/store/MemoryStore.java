@@ -33,7 +33,7 @@ import quickfix.SystemTime;
 /**
  * In-memory message store implementation.
  * 
- * @see quickfix.store.MemoryStoreFactory
+ * @see MemoryStoreFactory
  */
 public class MemoryStore implements MessageStore {
     private HashMap<Integer, String> messages = new HashMap<Integer, String>();

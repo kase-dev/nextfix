@@ -33,7 +33,7 @@ public class DayConverter {
      * 
      * @param dayName the day name (unambiguous abbreviations to 2 letters are allowed)
      * @return the week offset (starting at 1)
-     * @throws quickfix.ConfigError raised if conversion failed.
+     * @throws ConfigError raised if conversion failed.
      */
     public static int toInteger(String dayName) throws ConfigError {
         String dayNames[] = new DateFormatSymbols(Locale.US).getWeekdays();
@@ -54,7 +54,7 @@ public class DayConverter {
      * 
      * @param dayOffset week day offset (starting at 1)
      * @return the week day name
-     * @throws quickfix.ConfigError raised if offset is invalid.
+     * @throws ConfigError raised if offset is invalid.
      */
     public static String toString(int dayOffset) throws ConfigError {
         String dayNames[] = new DateFormatSymbols(Locale.US).getWeekdays();

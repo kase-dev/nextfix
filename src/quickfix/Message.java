@@ -667,7 +667,7 @@ public class Message extends FieldMap {
      *
      * @param message the FIX message string
      * @return the message type
-     * @throws quickfix.MessageParseError (QF JNI compatibility)
+     * @throws MessageParseError (QF JNI compatibility)
      */
     public static StringField identifyType(String message) throws MessageParseError {
         try {

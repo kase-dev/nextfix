@@ -1,6 +1,7 @@
 package kz.kase.fix.messages;
 
 import kz.kase.fix.*;
+import quickfix.Group;
 import quickfix.Message;
 
 import java.util.Date;
@@ -35,6 +36,45 @@ public class ExecutionReport extends Message {
         return isSetField(FixProtocol.FIELD_REFERENCE);
     }
 
+    public ExecutionReport setAvgPx(double ref) {
+        setDouble(FixProtocol.FIELD_AVG_PRC, ref);
+        return this;
+    }
+
+    public Double getAvgPx() {
+        return getDouble(FixProtocol.FIELD_AVG_PRC);
+    }
+
+    public boolean hasAvgPx() {
+        return isSetField(FixProtocol.FIELD_AVG_PRC);
+    }
+
+    public ExecutionReport setCashOrderQty(double ref) {
+        setDouble(FixProtocol.FIELD_ORDER_QTY, ref);
+        return this;
+    }
+
+    public Double getCashOrderQty() {
+        return getDouble(FixProtocol.FIELD_ORDER_QTY);
+    }
+
+    public boolean hasCashOrderQty() {
+        return isSetField(FixProtocol.FIELD_ORDER_QTY);
+    }
+
+    public ExecutionReport setSymbol(String ref) {
+        setString(FixProtocol.FIELD_SYMBOL, ref);
+        return this;
+    }
+
+    public String getSymbol() {
+        return getString(FixProtocol.FIELD_SYMBOL);
+    }
+
+    public boolean hasSymbol() {
+        return isSetField(FixProtocol.FIELD_SYMBOL);
+    }
+
 
     public ExecutionReport setExecType(ExecType execType) {
         setChar(FixProtocol.FIELD_EXEC_TYPE, execType.getValue());
@@ -52,6 +92,80 @@ public class ExecutionReport extends Message {
 
     public boolean hasLastQty() {
         return isSetField(FIELD_LAST_QTY);
+    }
+
+    public ExecutionReport setStopPrice(double price) {
+        setDouble(FIELD_STOP_PRICE, price);
+        return this;
+    }
+
+    public Double getStopPrice() {
+        return getDouble(FIELD_STOP_PRICE);
+    }
+
+    public boolean hasStopPrice() {
+        return isSetField(FIELD_STOP_PRICE);
+    }
+
+    public ExecutionReport setEndCash(double endCash) {
+        setDouble(FIELD_END_CASH, endCash);
+        return this;
+    }
+
+    public Double getEndCash() {
+        return getDouble(FIELD_END_CASH);
+    }
+
+    public boolean hasEndCash() {
+        return isSetField(FIELD_END_CASH);
+    }
+
+    public ExecutionReport setStartDate(Date date) {
+        setUtcDateOnly(FIELD_START_DATE, date);
+        return this;
+    }
+
+    public ExecutionReport setEndDate(Date date) {
+        setUtcDateOnly(FIELD_END_DATE, date);
+        return this;
+    }
+
+    public Date getEndDate() {
+        return getUtcDateOnly(FixProtocol.FIELD_END_DATE);
+    }
+
+    public Date getStartDate() {
+        return getUtcDateOnly(FixProtocol.FIELD_START_DATE);
+    }
+
+
+    public static class NoUnderlyings extends Group {
+
+        public NoUnderlyings() {
+            super(FIELD_NO_UNDERLYINGS, FIELD_UNDERLYING_SYMBOL,
+                    new int[]{
+                            311, 879
+                    });
+        }
+
+        public NoUnderlyings setUnderlyingSymbol(String type) {
+            setString(FixProtocol.FIELD_UNDERLYING_SYMBOL, type);
+            return this;
+        }
+
+        public String getUnderlyingSymbol() {
+            return getString(FixProtocol.FIELD_UNDERLYING_SYMBOL);
+        }
+
+        public NoUnderlyings setUnderlyingQty(Long qty) {
+            setLong(FixProtocol.FIELD_UNDERLYING_QTY, qty);
+            return this;
+        }
+
+        public Long getUnderlyingQty() {
+            return getLong(FixProtocol.FIELD_UNDERLYING_QTY);
+        }
+
     }
 
     public ExecutionReport setLastPrice(double price) {
@@ -283,14 +397,14 @@ public class ExecutionReport extends Message {
 
 
     public ExecutionReport setYield(Double yield) {
-        setDouble(FILED_YIELD, yield);
+        setDouble(FIELD_YIELD, yield);
         return this;
     }
 
-    public Double getYield() {
-        return getDouble(FILED_YIELD);
-    }
 
+    public Double getYield() {
+        return getDouble(FIELD_YIELD);
+    }
     public Long getQty() {
         return getLong(FixProtocol.FIELD_ORDER_QTY);
     }

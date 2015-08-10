@@ -56,7 +56,7 @@ public class Field<T> implements Serializable {
      * Gets the field's tag. (QF/C++ compatibility)
      *
      * @return the tag
-     * @see quickfix.field.Field#getTag()
+     * @see Field#getTag()
      */
     public int getField() {
         return getTag();

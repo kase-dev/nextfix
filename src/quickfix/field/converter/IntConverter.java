@@ -40,7 +40,7 @@ public final class IntConverter {
      * Convert a String to an integer.
      * @param value the String to convert
      * @return the converted integer
-     * @throws quickfix.FieldConvertError raised if the String does not represent a
+     * @throws FieldConvertError raised if the String does not represent a
      * valid integer.
      * @see java.lang.Integer#parseInt(String)
      */

@@ -58,7 +58,7 @@ public class UtcTimeOnlyConverter extends AbstractDateTimeConverter {
      * Convert between a String and a time
      * @param value the string to parse
      * @return a date object representing the time
-     * @throws quickfix.FieldConvertError raised for invalid time string
+     * @throws FieldConvertError raised for invalid time string
      */
     public static Date convert(String value) throws FieldConvertError {
         Date d = null;

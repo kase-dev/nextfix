@@ -44,6 +44,8 @@ public class BaseTradingRules extends quickfix.MessageComponent {
         return this;
     }
 
+
+
     public double getMaxPriceVariation() {
         return getDouble(FIELD_MAX_PRICE_VARIATION);
     }

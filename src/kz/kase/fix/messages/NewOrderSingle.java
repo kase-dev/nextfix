@@ -157,6 +157,35 @@ public class NewOrderSingle extends Message {
         return this;
     }
 
+    public static class NoUnderlyings extends Group {
+
+        public NoUnderlyings() {
+            super(FIELD_NO_UNDERLYINGS, FIELD_UNDERLYING_SYMBOL,
+                    new int[]{
+                            311, 879
+                    });
+        }
+
+        public NoUnderlyings setUnderlyingSymbol(String type) {
+            setString(FixProtocol.FIELD_UNDERLYING_SYMBOL, type);
+            return this;
+        }
+
+        public String getUnderlyingSymbol() {
+            return getString(FixProtocol.FIELD_UNDERLYING_SYMBOL);
+        }
+
+        public NoUnderlyings setUnderlyingQty(Long qty) {
+            setLong(FixProtocol.FIELD_UNDERLYING_QTY, qty);
+            return this;
+        }
+
+        public Long getUnderlyingQty() {
+            return getLong(FixProtocol.FIELD_UNDERLYING_QTY);
+        }
+
+    }
+
     public Long getQty() {
         return getLong(FIELD_ORDER_QTY);
     }

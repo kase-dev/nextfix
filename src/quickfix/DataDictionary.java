@@ -102,7 +102,7 @@ public class DataDictionary {
      *
      * @param location
      *            a URL or file system path
-     * @throws quickfix.ConfigError
+     * @throws ConfigError
      */
     public DataDictionary(String location) throws ConfigError {
         read(location);
@@ -113,7 +113,7 @@ public class DataDictionary {
      *
      * @param in
      *            the input stream
-     * @throws quickfix.ConfigError
+     * @throws ConfigError
      */
     public DataDictionary(InputStream in) throws ConfigError {
         load(in);
@@ -588,9 +588,9 @@ public class DataDictionary {
      *
      * @param message
      *            the message
-     * @throws quickfix.IncorrectTagValue
+     * @throws IncorrectTagValue
      *             if a field value is not valid
-     * @throws quickfix.IncorrectDataFormat
+     * @throws IncorrectDataFormat
      */
     public void validate(Message message) throws IncorrectTagValue,
             IncorrectDataFormat {
@@ -604,9 +604,9 @@ public class DataDictionary {
      *            the message
      * @param bodyOnly
      *            whether to validate just the message body, or to validate the header and trailer sections as well.
-     * @throws quickfix.IncorrectTagValue
+     * @throws IncorrectTagValue
      *             if a field value is not valid
-     * @throws quickfix.IncorrectDataFormat
+     * @throws IncorrectDataFormat
      */
     public void validate(Message message, boolean bodyOnly) throws IncorrectTagValue, IncorrectDataFormat {
         validate(message, bodyOnly ? null : this, this);
@@ -839,7 +839,7 @@ public class DataDictionary {
         final InputStream inputStream = FileUtil.open(getClass(), location, URL, FILESYSTEM,
                 CONTEXT_RESOURCE, CLASSLOADER_RESOURCE);
         if (inputStream == null) {
-            throw new Exception("Could not find data dictionary: " + location);
+            throw new DataDictionary.Exception("Could not find data dictionary: " + location);
         }
 
         try {

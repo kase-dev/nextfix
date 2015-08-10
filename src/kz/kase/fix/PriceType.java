@@ -7,6 +7,7 @@ public enum PriceType implements IntItem {
     PerUnit(2),
     FixedAmount(3),
     Discount(4),
+    Percentage_dirty(5),
     Spread(6),
     Yield(9),;
 

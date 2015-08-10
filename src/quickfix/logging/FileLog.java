@@ -37,7 +37,7 @@ import quickfix.field.converter.UtcTimestampConverter;
  * File log implementation. THIS CLASS IS PUBLIC ONLY TO MAINTAIN COMPATIBILITY
  * WITH THE QUICKFIX JNI. IT SHOULD ONLY BE CREATED USING A FACTORY.
  * 
- * @see quickfix.logging.FileLogFactory
+ * @see FileLogFactory
  */
 public class FileLog extends AbstractLog {
     private static final byte[] TIME_STAMP_DELIMETER;

@@ -19,12 +19,11 @@
 
 package quickfix.mina.acceptor;
 
+import kz.kase.fix.ApplVerID;
 import kz.kase.fix.FixProtocol;
+import kz.kase.fix.messages.Logout;
 import org.apache.mina.core.session.IoSession;
-import quickfix.Message;
-import quickfix.MessageUtils;
-import quickfix.Session;
-import quickfix.SessionID;
+import quickfix.*;
 import quickfix.logging.Log;
 import quickfix.mina.*;
 
@@ -64,8 +63,11 @@ class AcceptorIoHandler extends AbstractIoHandler {
                     if (qfSession.hasResponder()) {
                         // Session is already bound to another connection
                         sessionLog.onErrorEvent("Multiple logons/connections for this session are not allowed");
+                        Logout logout = createLogoutReject(MessageUtils.getReverseSessionID(message), "Already online",
+                                qfSession.getSenderDefaultApplicationVersionID());
+                        sessionLog.onOutgoing(logout.toString());
+                        protocolSession.write(logout.toString());
                         protocolSession.close();
-                        //todo send Logout response!
                         return;
                     }
 
@@ -114,6 +116,21 @@ class AcceptorIoHandler extends AbstractIoHandler {
             }
         }
         return s;
+    }
+
+    public static Logout createLogoutReject(SessionID sessionID, String reason, ApplVerID applVerID) {
+        Logout logout = new Logout();
+        logout.setText(reason);
+        logout.setString(FixProtocol.FIELD_DEFAULT_APP_VERSION_ID, applVerID.getValue());
+        Message.Header header = logout.getHeader();
+//        state.setLastSentTime(SystemTime.currentTimeMillis());
+        header.setString(FixProtocol.FIELD_BEGIN_STRING, sessionID.getBeginString());
+        header.setString(FixProtocol.FIELD_SENDER_COMP_ID, sessionID.getSenderCompID());
+        header.setString(FixProtocol.FIELD_TARGET_COMP_ID, sessionID.getTargetCompID());
+        header.setInt(FixProtocol.FIELD_MSG_SEQ_NUM, 1);
+        header.setUtcTimeStamp(FixProtocol.FIELD_SENDING_TIME, SystemTime.getDate(), true);
+
+        return logout;
     }
 
 }

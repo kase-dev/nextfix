@@ -35,7 +35,7 @@ public class CompositeLogFactory implements LogFactory {
      * Defines a composite log factory based on a set of existing
      * LogFactory implementations.
      * @param logFactories the factories to be used in the composite
-     * @see quickfix.logging.LogFactory
+     * @see LogFactory
      */
     public CompositeLogFactory(LogFactory[] logFactories) {
         this.logFactories = logFactories;

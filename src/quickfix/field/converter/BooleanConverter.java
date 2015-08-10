@@ -44,7 +44,7 @@ public class BooleanConverter {
      * 
      * @param value the String value to convert
      * @return true if "Y" and false if "N"
-     * @throws quickfix.FieldConvertError raised for any value other than "Y" or "N".
+     * @throws FieldConvertError raised for any value other than "Y" or "N".
      */
     public static boolean convert(String value) throws FieldConvertError {
         if (YES.equals(value)) {

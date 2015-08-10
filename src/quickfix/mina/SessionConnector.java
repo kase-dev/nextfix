@@ -154,8 +154,8 @@ public abstract class SessionConnector implements Connector {
         return true;
     }
 
-    private Set<Session> getLoggedOnSessions() {
-        Set<Session> loggedOnSessions = new HashSet<Session>(sessions.size());
+    private Set<quickfix.Session> getLoggedOnSessions() {
+        Set<quickfix.Session> loggedOnSessions = new HashSet<quickfix.Session>(sessions.size());
         for (Session session : sessions.values()) {
             if (session.isLoggedOn()) {
                 loggedOnSessions.add(session);
@@ -288,7 +288,7 @@ public abstract class SessionConnector implements Connector {
      * FIX codec filter name can be used to for inserting custom filters before or after the FIX message codec.
      *
      * @param ioFilterChainBuilder
-     * @see org.apache.mina.core.filterchain.IoFilterChainBuilder
+     * @see IoFilterChainBuilder
      */
     public void setIoFilterChainBuilder(IoFilterChainBuilder ioFilterChainBuilder) {
         this.ioFilterChainBuilder = ioFilterChainBuilder;

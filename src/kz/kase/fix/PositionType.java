@@ -5,8 +5,16 @@ public enum PositionType implements StringItem {
     AllocationTradeQty("ALC"),
     OptionAssignment("AS"),
     AsOfTradeQty("ASF"),
-    //todo add rest types...
-    ;
+    CurrentPos("CUR"),
+    PlannedBuy("PB"),
+    PlannedSell("PS"),
+    Bought("B"),
+    Sold("S"),
+    AvgBought("AB"),
+    AvgSold("AS"),
+    Margin("M"),
+    Blocked("B");
+
 
     private final String value;
 
@@ -18,6 +26,5 @@ public enum PositionType implements StringItem {
     public String getValue() {
         return value;
     }
-
 
 }

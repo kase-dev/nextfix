@@ -24,9 +24,9 @@ package quickfix;
  * Used by a Session to send raw FIX message data and to disconnect a
  * connection. This interface is used by Acceptor or Initiator implementations.
  * 
- * @see Session
- * @see Acceptor
- * @see Initiator
+ * @see quickfix.Session
+ * @see quickfix.Acceptor
+ * @see quickfix.Initiator
  */
 public interface Responder {
     /**

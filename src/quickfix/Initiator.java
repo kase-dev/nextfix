@@ -27,7 +27,7 @@ public interface Initiator extends Connector {
      * Initiator setting for reconnect interval in seconds. Only valid when
      * session connection type is "initiator".
      *
-     * @see SessionFactory#SETTING_CONNECTION_TYPE
+     * @see quickfix.SessionFactory#SETTING_CONNECTION_TYPE
      */
     public static final String SETTING_RECONNECT_INTERVAL = "ReconnectInterval";
     
@@ -40,7 +40,7 @@ public interface Initiator extends Connector {
      * Initiator setting for connection host. Only valid when session connection
      * type is "initiator".
      *
-     * @see SessionFactory#SETTING_CONNECTION_TYPE
+     * @see quickfix.SessionFactory#SETTING_CONNECTION_TYPE
      */
     public static final String SETTING_SOCKET_CONNECT_HOST = "SocketConnectHost";
 
@@ -48,7 +48,7 @@ public interface Initiator extends Connector {
      * Initiator setting for connection port. Only valid when session connection
      * type is "initiator".
      *
-     * @see SessionFactory#SETTING_CONNECTION_TYPE
+     * @see quickfix.SessionFactory#SETTING_CONNECTION_TYPE
      */
     public static final String SETTING_SOCKET_CONNECT_PORT = "SocketConnectPort";
 
@@ -56,7 +56,7 @@ public interface Initiator extends Connector {
      * Initiator setting for local/bind host. Only valid when session connection
      * type is "initiator".
      *
-     * @see SessionFactory#SETTING_CONNECTION_TYPE
+     * @see quickfix.SessionFactory#SETTING_CONNECTION_TYPE
      */
     public static final String SETTING_SOCKET_LOCAL_HOST = "SocketLocalHost";
 
@@ -64,7 +64,7 @@ public interface Initiator extends Connector {
      * Initiator setting for local/bind port. Only valid when session connection
      * type is "initiator".
      *
-     * @see SessionFactory#SETTING_CONNECTION_TYPE
+     * @see quickfix.SessionFactory#SETTING_CONNECTION_TYPE
      */
     public static final String SETTING_SOCKET_LOCAL_PORT = "SocketLocalPort";
 }

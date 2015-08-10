@@ -24,7 +24,7 @@ public class KaseFixMessageFactory implements MessageFactory {
             return new MDFullSnapshotRefresh();
 
         } else if (FixProtocol.MESSAGE_POS_REPORT.equals(msgType)) {
-            return new PositionReport(true);
+            return new PositionReport();
 
         } else if (FixProtocol.MESSAGE_DAY_POS_REPORT.equals(msgType)) {
             return new DayPositionReport();
@@ -108,7 +108,16 @@ public class KaseFixMessageFactory implements MessageFactory {
 
         } else if (FixProtocol.MESSAGE_POS_TRANSFER_INSTRUCTION.equals(msgType)) {
             return new PositionTransferInstruction();
-
+        } else if (FixProtocol.MESSAGE_POS_TRANSFER_REPORT.equals(msgType)) {
+            return new PositionTransferReport();
+        } else if (FixProtocol.MESSAGE_USER_REQUEST.equals(msgType)) {
+            return new UserRequest();
+        } else if (FixProtocol.MESSAGE_USER_RESP.equals(msgType)) {
+            return new UserResponse();
+        } else if (FixProtocol.MESSAGE_ORDER_CANCEL_REPLACE_REQUEST.equals(msgType)) {
+            return new OrderCancelReplaceRequest();
+        } else if (FixProtocol.MESSAGE_EMAIL.equals(msgType)) {
+            return new Email();
         }
 
         System.err.println("Unknown message type: '" + msgType + "'");

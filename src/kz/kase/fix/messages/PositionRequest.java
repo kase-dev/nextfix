@@ -24,7 +24,7 @@ public class PositionRequest extends Message {
 
             setInt(FIELD_POSITION_TRANS_TYPE, transType.getValue());
             setInt(FIELD_POSITION_MAINT_ACTION, maintAction.getValue());
-            setUtcDateOnly(FIELD_CLEARING_BUSINESS_DAY, new Date());
+            setUtcDateOnly(FIELD_CLEARING_BUSINESS_DATE, new Date());
             setString(FIELD_ACCOUNT, FixProtocol.NOT_SET);
             setInt(FIELD_ACCOUNT_TYPE, AccountType.HOUSE_TRADER.getValue());
             setString(FIELD_SYMBOL, FixProtocol.NOT_SET);

@@ -109,19 +109,6 @@ public class Logon extends Message {
         return isSetField(FIELD_MEMBER_NAME);
     }
 
-    public Logon setNewPass(String newPass) {
-        setString(FIELD_NEW_PASSWORD, newPass);
-        return this;
-    }
-
-    public String getNewPass() {
-        return getString(FIELD_NEW_PASSWORD);
-    }
-
-    public boolean hasNewPass() {
-        return isSetField(FIELD_NEW_PASSWORD);
-    }
-
     public Logon setEncryptedPassMethod(int method) {
         setInt(FIELD_ENCRYPTED_PASSWORD_METHOD, method);
         return this;
@@ -187,5 +174,18 @@ public class Logon extends Message {
         return isSetField(FIELD_ENCRYPTED_NEW_PASSWORD_LEN);
     }
 
+
+    public Logon setText(String text) {
+        setString(FixProtocol.FIELD_TEXT, text);
+        return this;
+    }
+
+    public String getText() {
+        return getString(FixProtocol.FIELD_TEXT);
+    }
+
+    public boolean hasText() {
+        return isSetField(FixProtocol.FIELD_TEXT);
+    }
 
 }

@@ -19,51 +19,35 @@
 
 package quickfix;
 
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
-import java.io.PrintWriter;
-import java.io.Reader;
-import java.io.StringWriter;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import quickfix.field.converter.BooleanConverter;
+
+import java.io.*;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.security.InvalidParameterException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Properties;
-import java.util.Set;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import quickfix.field.converter.BooleanConverter;
 
 /**
  * Settings for sessions. Settings are grouped by FIX version and target company
  * ID. There is also a default settings section that is inherited by the
  * session-specific sections.
- *
+ * <p/>
  * Setting constants are declared in the classes using the settings. To find the
  * string constants, navigate to the class constant for the setting, select the
  * link for the setting and then and select the "Constant Field Values" link in
  * the detailed field description.
  *
- * @see Acceptor
- * @see Initiator
+ * @see quickfix.Acceptor
+ * @see quickfix.Initiator
  * @see quickfix.logging.FileLogFactory
  * @see quickfix.logging.ScreenLogFactory
  * @see quickfix.store.FileStoreFactory
- * @see Session
- * @see DefaultSessionFactory
+ * @see quickfix.Session
+ * @see quickfix.DefaultSessionFactory
  */
 public class SessionSettings {
 
@@ -97,8 +81,7 @@ public class SessionSettings {
     /**
      * Loads session settings from a file.
      *
-     * @param filename
-     *            the path to the file containing the session settings
+     * @param filename the path to the file containing the session settings
      */
     public SessionSettings(String filename) throws ConfigError {
         this();
@@ -116,9 +99,8 @@ public class SessionSettings {
     /**
      * Loads session settings from an input stream.
      *
-     * @param stream
-     *            the input stream
-     * @throws quickfix.ConfigError
+     * @param stream the input stream
+     * @throws ConfigError
      */
     public SessionSettings(InputStream stream) throws ConfigError {
         this();
@@ -130,8 +112,8 @@ public class SessionSettings {
      *
      * @param key
      * @return the default string value
-     * @throws quickfix.ConfigError
-     * @throws quickfix.FieldConvertError
+     * @throws ConfigError
+     * @throws FieldConvertError
      */
     public String getString(String key) throws ConfigError, FieldConvertError {
         return getString(DEFAULT_SESSION_ID, key);
@@ -140,16 +122,11 @@ public class SessionSettings {
     /**
      * Get a settings string.
      *
-     * @param sessionID
-     *            the session ID
-     * @param key
-     *            the settings key
+     * @param sessionID the session ID
+     * @param key       the settings key
      * @return the string value for the setting
-     *
-     * @throws quickfix.ConfigError
-     *             configurion error, probably a missing setting.
-     * @throws quickfix.FieldConvertError
-     *             error during field type conversion.
+     * @throws ConfigError       configurion error, probably a missing setting.
+     * @throws FieldConvertError error during field type conversion.
      */
     public String getString(SessionID sessionID, String key) throws ConfigError, FieldConvertError {
         final String value = interpolate(getSessionProperties(sessionID).getProperty(key));
@@ -165,7 +142,7 @@ public class SessionSettings {
      * @param sessionID
      * @param includeDefaults if true, include settings defaults in properties
      * @return the Properties object with the session settings
-     * @throws quickfix.ConfigError
+     * @throws ConfigError
      * @see java.util.Properties
      */
     public Properties getSessionProperties(SessionID sessionID, boolean includeDefaults)
@@ -189,7 +166,7 @@ public class SessionSettings {
      *
      * @param sessionID
      * @return the Properties object with the session settings
-     * @throws quickfix.ConfigError
+     * @throws ConfigError
      * @see java.util.Properties
      */
     public Properties getSessionProperties(SessionID sessionID) throws ConfigError {
@@ -198,8 +175,9 @@ public class SessionSettings {
 
     /**
      * Returns the defaults for the session-level settings.
+     *
      * @return the default properties
-     * @throws quickfix.ConfigError
+     * @throws ConfigError
      */
     public Properties getDefaultProperties() {
         try {
@@ -215,8 +193,8 @@ public class SessionSettings {
      *
      * @param key
      * @return the default value
-     * @throws quickfix.ConfigError
-     * @throws quickfix.FieldConvertError
+     * @throws ConfigError
+     * @throws FieldConvertError
      */
     public long getLong(String key) throws ConfigError, FieldConvertError {
         return getLong(DEFAULT_SESSION_ID, key);
@@ -225,16 +203,11 @@ public class SessionSettings {
     /**
      * Get a settings value as a long integer.
      *
-     * @param sessionID
-     *            the session ID
-     * @param key
-     *            the settings key
+     * @param sessionID the session ID
+     * @param key       the settings key
      * @return the long integer value for the setting
-     *
-     * @throws quickfix.ConfigError
-     *             configurion error, probably a missing setting.
-     * @throws quickfix.FieldConvertError
-     *             error during field type conversion.
+     * @throws ConfigError       configurion error, probably a missing setting.
+     * @throws FieldConvertError error during field type conversion.
      */
     public long getLong(SessionID sessionID, String key) throws ConfigError, FieldConvertError {
         try {
@@ -258,8 +231,8 @@ public class SessionSettings {
      *
      * @param key
      * @return the default value
-     * @throws quickfix.ConfigError
-     * @throws quickfix.FieldConvertError
+     * @throws ConfigError
+     * @throws FieldConvertError
      */
     public double getDouble(String key) throws ConfigError, FieldConvertError {
         return getDouble(DEFAULT_SESSION_ID, key);
@@ -268,16 +241,11 @@ public class SessionSettings {
     /**
      * Get a settings value as a double number.
      *
-     * @param sessionID
-     *            the session ID
-     * @param key
-     *            the settings key
+     * @param sessionID the session ID
+     * @param key       the settings key
      * @return the double number value for the setting
-     *
-     * @throws quickfix.ConfigError
-     *             configurion error, probably a missing setting.
-     * @throws quickfix.FieldConvertError
-     *             error during field type conversion.
+     * @throws ConfigError       configurion error, probably a missing setting.
+     * @throws FieldConvertError error during field type conversion.
      */
     public double getDouble(SessionID sessionID, String key) throws ConfigError, FieldConvertError {
         try {
@@ -292,8 +260,8 @@ public class SessionSettings {
      *
      * @param key
      * @return the boolean value
-     * @throws quickfix.ConfigError
-     * @throws quickfix.FieldConvertError
+     * @throws ConfigError
+     * @throws FieldConvertError
      */
     public boolean getBool(String key) throws ConfigError, FieldConvertError {
         return getBool(DEFAULT_SESSION_ID, key);
@@ -302,16 +270,11 @@ public class SessionSettings {
     /**
      * Get a settings value as a boolean value.
      *
-     * @param sessionID
-     *            the session ID
-     * @param key
-     *            the settings key
+     * @param sessionID the session ID
+     * @param key       the settings key
      * @return the boolean value for the setting
-     *
-     * @throws quickfix.ConfigError
-     *             configurion error, probably a missing setting.
-     * @throws quickfix.FieldConvertError
-     *             error during field type conversion.
+     * @throws ConfigError       configurion error, probably a missing setting.
+     * @throws FieldConvertError error during field type conversion.
      */
     public boolean getBool(SessionID sessionID, String key) throws ConfigError, FieldConvertError {
         try {
@@ -324,12 +287,9 @@ public class SessionSettings {
     /**
      * Sets a string-valued session setting.
      *
-     * @param sessionID
-     *            the session ID
-     * @param key
-     *            the setting key
-     * @param value
-     *            the string value
+     * @param sessionID the session ID
+     * @param key       the setting key
+     * @param value     the string value
      */
     public void setString(SessionID sessionID, String key, String value) {
         getOrCreateSessionProperties(sessionID).setProperty(key, value.trim());
@@ -338,12 +298,9 @@ public class SessionSettings {
     /**
      * Sets a long integer-valued session setting.
      *
-     * @param sessionID
-     *            the session ID
-     * @param key
-     *            the setting key
-     * @param value
-     *            the long integer value
+     * @param sessionID the session ID
+     * @param key       the setting key
+     * @param value     the long integer value
      */
     public void setLong(SessionID sessionID, String key, long value) {
         getOrCreateSessionProperties(sessionID).setProperty(key, Long.toString(value));
@@ -353,12 +310,9 @@ public class SessionSettings {
     /**
      * Sets a double-valued session setting.
      *
-     * @param sessionID
-     *            the session ID
-     * @param key
-     *            the setting key
-     * @param value
-     *            the double value
+     * @param sessionID the session ID
+     * @param key       the setting key
+     * @param value     the double value
      */
     public void setDouble(SessionID sessionID, String key, double value) {
         getOrCreateSessionProperties(sessionID).setProperty(key, Double.toString(value));
@@ -368,12 +322,9 @@ public class SessionSettings {
     /**
      * Sets a boolean-valued session setting.
      *
-     * @param sessionID
-     *            the session ID
-     * @param key
-     *            the setting key
-     * @param value
-     *            the boolean value
+     * @param sessionID the session ID
+     * @param key       the setting key
+     * @param value     the boolean value
      */
     public void setBool(SessionID sessionID, String key, boolean value) {
         getOrCreateSessionProperties(sessionID).setProperty(key, BooleanConverter.convert(value));
@@ -451,14 +402,16 @@ public class SessionSettings {
     /**
      * Predicate for determining if a setting exists.
      *
-     * @param sessionID
-     *            the session ID
-     * @param key
-     *            the setting key
+     * @param sessionID the session ID
+     * @param key       the setting key
      * @return true is setting exists, false otherwise.
      */
     public boolean isSetting(SessionID sessionID, String key) {
         return getOrCreateSessionProperties(sessionID).getProperty(key) != null;
+    }
+
+    public void removeSession(SessionID sessionID) {
+        sections.remove(sessionID);
     }
 
     public void removeSetting(SessionID sessionID, String key) {
@@ -595,18 +548,18 @@ public class SessionSettings {
      * Set properties that will be the source of variable values in the settings. A variable
      * is of the form ${variable} and will be replaced with values from the
      * map when the setting is retrieved.
-     *
+     * <p/>
      * By default, the System properties are used for variable values. If
      * you use this method, it will override the defaults so use the Properties
      * default value mechanism if you want to chain a custom properties object
      * with System properties as the default.
-     *
+     * <p/>
      * <code><pre>
      * // Custom properties with System properties as default
      * Properties myprops = new Properties(System.getProperties());
      * myprops.load(getPropertiesInputStream());
      * settings.setVariableValues(myprops);
-     *
+     * <p/>
      * // Custom properties with System properties as override
      * Properties myprops = new Properties();
      * myprops.load(getPropertiesInputStream());
@@ -615,7 +568,6 @@ public class SessionSettings {
      * </pre></code>
      *
      * @param variableValues
-     *
      * @see java.util.Properties
      * @see java.lang.System
      */
@@ -636,7 +588,8 @@ public class SessionSettings {
 
     /**
      * Set a default boolean parameter.
-     * @param key the settings key
+     *
+     * @param key   the settings key
      * @param value the settings value
      */
     public void setBool(String key, boolean value) {
@@ -645,7 +598,8 @@ public class SessionSettings {
 
     /**
      * Set a default double parameter.
-     * @param key the settings key
+     *
+     * @param key   the settings key
      * @param value the settings value
      */
     public void setDouble(String key, double value) {
@@ -654,7 +608,8 @@ public class SessionSettings {
 
     /**
      * Set a default long parameter.
-     * @param key the settings key
+     *
+     * @param key   the settings key
      * @param value the settings value
      */
     public void setLong(String key, long value) {
@@ -663,7 +618,8 @@ public class SessionSettings {
 
     /**
      * Set a default string parameter.
-     * @param key the settings key
+     *
+     * @param key   the settings key
      * @param value the settings value
      */
     public void setString(String key, String value) {

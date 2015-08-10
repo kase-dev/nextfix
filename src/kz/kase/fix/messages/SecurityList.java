@@ -106,14 +106,61 @@ public class SecurityList extends Message {
                             875, 876, 864, 873, 874, 965, 966, 1049, 967, 968, 969, 970,
                             971, 1018, 996, 997, 1079, 668, 869, 870, 913, 914, 915, 918,
                             788, 916, 917, 919, 898, 711, 15, 232, 555, 218, 220, 221,
-                            222, 662, 663, 699, 761, 235, 236, 701, 696, 697, 698,
+                            222, 662, 663, 699, 761, 235, 236,  701, 696, 40746,742, 697, 698,
                             827, 354, 355, 0,
                             5031, 5032, 5033, 5034, 5035, 5036, 5037, 5038, 5039, 5040,
                             5041, 5042, 5043, 5044, 5045, 5046, 5047,
                             1309, 336, 625, 5184, 1312, 1210, 1211, 40,
-                            562, 1140, 1143, 1245, 561, 423, 58, 1237,1239,59
-
+                            562, 1140, 1143, 1245, 561, 423, 58, 1237, 1239, 59,40739,1149,1148,1150
                     });
+        }
+
+
+        public static class NoUnderlyings extends Group {
+
+            public NoUnderlyings() {
+                super(FIELD_NO_UNDERLYINGS, FIELD_UNDERLYING_SYMBOL,
+                        new int[]{
+                                311, 435, 879, 810
+                        });
+            }
+
+            public NoUnderlyings setUnderlyingSymbol(String type) {
+                setString(FixProtocol.FIELD_UNDERLYING_SYMBOL, type);
+                return this;
+            }
+
+            public String getUnderlyingSymbol() {
+                return getString(FixProtocol.FIELD_UNDERLYING_SYMBOL);
+            }
+
+            public NoUnderlyings setUnderlyingQty(Long qty) {
+                setLong(FixProtocol.FIELD_UNDERLYING_QTY, qty);
+                return this;
+            }
+
+            public Long getUnderlyingQty() {
+                return getLong(FixProtocol.FIELD_UNDERLYING_QTY);
+            }
+
+            public NoUnderlyings setUnderlyingCouponRate(Long rate) {
+                setLong(FixProtocol.FIELD_UNDERLYING_COUPON_RATE, rate);
+                return this;
+            }
+
+            public Long getUnderlyingCouponRate() {
+                return getLong(FixProtocol.FIELD_UNDERLYING_COUPON_RATE);
+            }
+
+            public NoUnderlyings setUnderlyingPx(Double px) {
+                setDouble(FixProtocol.FIELD_UNDERLYING_PX, px);
+                return this;
+            }
+
+            public Double getUnderlyingPx() {
+                return getDouble(FixProtocol.FIELD_UNDERLYING_PX);
+            }
+
         }
 
         public NoRelatedSym addNoTIFRules(NoTimeInForceRules rules) {
@@ -269,7 +316,7 @@ public class SecurityList extends Message {
         }
     }
 
-    public static class NoOrdTypeRules extends Group {
+    public static class NoOrdTypeRules extends quickfix.Group {
 
 
         public NoOrdTypeRules() {
@@ -324,7 +371,7 @@ public class SecurityList extends Message {
 
     }
 
-    public static class NoTimeInForceRules extends Group {
+    public static class NoTimeInForceRules extends quickfix.Group {
 
 
         public NoTimeInForceRules() {
@@ -341,7 +388,6 @@ public class SecurityList extends Message {
         }
 
     }
-
 
 
 }

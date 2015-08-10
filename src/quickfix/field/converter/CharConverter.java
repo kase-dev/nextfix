@@ -39,7 +39,7 @@ public class CharConverter {
      * Convert a String value to a character.
      * @param value
      * @return the converted character
-     * @throws quickfix.FieldConvertError if String length != 1
+     * @throws FieldConvertError if String length != 1
      */
     public static char convert(String value) throws FieldConvertError {
         if (value.length() != 1) {

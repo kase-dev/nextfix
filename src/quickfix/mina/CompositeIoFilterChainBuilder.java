@@ -32,8 +32,8 @@ import org.apache.mina.core.filterchain.IoFilterChainBuilder;
  * coder/decoder factory and delegate additional filter customizations to
  * an optional user-defined IoFilterChainBuilder.
  * 
- * @see org.apache.mina.core.filterchain.IoFilterChainBuilder
- * @see org.apache.mina.core.filterchain.DefaultIoFilterChainBuilder
+ * @see IoFilterChainBuilder
+ * @see DefaultIoFilterChainBuilder
  *
  */
 public class CompositeIoFilterChainBuilder extends DefaultIoFilterChainBuilder {

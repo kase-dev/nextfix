@@ -32,7 +32,7 @@ public interface DataDictionaryProvider {
      * @param beginString FIX.4.0 through FIXT.1.1
      * @return the data dictionary for the specified session protocol version 
      * or null if no such dictionary is available.
-     * @see quickfix.FixVersions
+     * @see FixVersions
      */
     DataDictionary getSessionDataDictionary(String beginString);
 

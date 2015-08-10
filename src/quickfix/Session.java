@@ -533,7 +533,7 @@ public class Session implements Closeable {
      *
      * @param message a FIX message
      * @return true is send was successful, false otherwise
-     * @throws quickfix.SessionNotFound if session could not be located
+     * @throws SessionNotFound if session could not be located
      */
     public static boolean sendToTarget(Message message) throws SessionNotFound {
         return sendToTarget(message, "");
@@ -547,7 +547,7 @@ public class Session implements Closeable {
      * @param message   a FIX message
      * @param qualifier a session qualifier
      * @return true is send was successful, false otherwise
-     * @throws quickfix.SessionNotFound if session could not be located
+     * @throws SessionNotFound if session could not be located
      */
     public static boolean sendToTarget(Message message, String qualifier) throws SessionNotFound {
         final String senderCompID = message.getHeader().getString(FixProtocol.FIELD_SENDER_COMP_ID);
@@ -564,7 +564,7 @@ public class Session implements Closeable {
      * @param senderCompID the sender's company ID
      * @param targetCompID the target's company ID
      * @return true is send was successful, false otherwise
-     * @throws quickfix.SessionNotFound if session could not be located
+     * @throws SessionNotFound if session could not be located
      */
     public static boolean sendToTarget(Message message, String senderCompID, String targetCompID)
             throws SessionNotFound {
@@ -582,7 +582,7 @@ public class Session implements Closeable {
      * @param targetCompID the target's company ID
      * @param qualifier    a session qualifier
      * @return true is send was successful, false otherwise
-     * @throws quickfix.SessionNotFound if session could not be located
+     * @throws SessionNotFound if session could not be located
      */
     public static boolean sendToTarget(Message message, String senderCompID, String targetCompID,
                                        String qualifier) throws SessionNotFound {
@@ -603,7 +603,7 @@ public class Session implements Closeable {
      * @param message   a FIX message
      * @param sessionID the target SessionID
      * @return true is send was successful, false otherwise
-     * @throws quickfix.SessionNotFound if session could not be located
+     * @throws SessionNotFound if session could not be located
      */
     public static boolean sendToTarget(Message message, SessionID sessionID) throws SessionNotFound {
         final Session session = lookupSession(sessionID);
@@ -653,7 +653,7 @@ public class Session implements Closeable {
         this.enabled = enabled;
     }
 
-    private void initializeHeader(Header header) {
+    private void initializeHeader(Message.Header header) {
         state.setLastSentTime(SystemTime.currentTimeMillis());
         header.setString(FixProtocol.FIELD_BEGIN_STRING, sessionID.getBeginString());
         header.setString(FixProtocol.FIELD_SENDER_COMP_ID, sessionID.getSenderCompID());
@@ -672,7 +672,7 @@ public class Session implements Closeable {
         }
     }
 
-    private void insertSendingTime(Header header) {
+    private void insertSendingTime(Message.Header header) {
         final boolean includeMillis = sessionID.getBeginString().compareTo(
                 FixVersions.BEGINSTRING_FIX42) >= 0
                 && millisecondsInTimeStamp;
@@ -767,7 +767,7 @@ public class Session implements Closeable {
      * Logs out and disconnects session and then resets session state.
      *
      * @throws IOException IO error
-     * @see quickfix.SessionState#reset()
+     * @see SessionState#reset()
      */
     public /*synchronized*/ void reset() throws IOException {
         if (hasResponder()) {
@@ -1093,7 +1093,7 @@ public class Session implements Closeable {
      * @param beginSeqNo     the seqNum of the first missing message
      * @param endSeqNo       the seqNum of the last missing message
      * @throws IOException
-     * @throws quickfix.InvalidMessage
+     * @throws InvalidMessage
      */
     private void manageGapFill(Message messageOutSync, int beginSeqNo, int endSeqNo)
             throws IOException, InvalidMessage {
@@ -1241,7 +1241,7 @@ public class Session implements Closeable {
     }
 
     private void initializeResendFields(Message message) {
-        final Header header = message.getHeader();
+        final Message.Header header = message.getHeader();
         final Date sendingTime = header.getUtcTimeStamp(FixProtocol.FIELD_SENDING_TIME);
         header.setUtcTimeStamp(FixProtocol.FIELD_ORIG_SENDING_TIME, sendingTime);
         header.setBoolean(FixProtocol.FIELD_POSS_DUP_FLAG, true);
@@ -1539,7 +1539,7 @@ public class Session implements Closeable {
 
         String msgType;
         try {
-            final Header header = msg.getHeader();
+            final Message.Header header = msg.getHeader();
             final String senderCompID = header.getString(FixProtocol.FIELD_SENDER_COMP_ID);
             final String targetCompID = header.getString(FixProtocol.FIELD_TARGET_COMP_ID);
             final Date sendingTime = header.getUtcTimeStamp(FixProtocol.FIELD_SENDING_TIME);
@@ -2070,7 +2070,7 @@ public class Session implements Closeable {
 
 
     private void doTargetTooHigh(Message msg) throws IOException, InvalidMessage {
-        final Header header = msg.getHeader();
+        final Message.Header header = msg.getHeader();
         final String beginString = header.getString(FixProtocol.FIELD_BEGIN_STRING);
         final int msgSeqNum = header.getInt(FixProtocol.FIELD_MSG_SEQ_NUM);
 
@@ -2134,7 +2134,7 @@ public class Session implements Closeable {
     }
 
     private boolean validatePossDup(Message msg) throws IOException {
-        final Header header = msg.getHeader();
+        final Message.Header header = msg.getHeader();
         final String msgType = header.getString(FixProtocol.FIELD_MESSAGE_TYPE);
         final Date sendingTime = header.getUtcTimeStamp(FixProtocol.FIELD_SENDING_TIME);
 
@@ -2209,7 +2209,7 @@ public class Session implements Closeable {
         state.lockSenderMsgSeqNum();
         try {
             boolean result = false;
-            final Header header = message.getHeader();
+            final Message.Header header = message.getHeader();
             final String msgType = header.getString(FixProtocol.FIELD_MESSAGE_TYPE);
 
             initializeHeader(header);

@@ -91,9 +91,9 @@ public class MDIncRefresh extends Message {
                             555, 291, 292, 270, 15, 271, 272, 273, 274, 275, 336, 625,
                             276, 277, 282, 283, 284, 286, 59, 432, 126, 110, 18, 287, 37,
                             299, 288, 289, 346, 290, 546, 811, 451, 5106, 5107, 58, 354, 355, 528,
-                            1024, 332, 333, /* [ */ 1025, 31 /* ] */, 1020, 63, 64, 1070, 83, 1048, 1026, 1027,
+                            1024, 332, 333, /* [ */ 1025, 31, 32 /* ] */, 1020, 63, 64, 1070, 83, 1048, 1026, 1027,
                             1023, 453, 198, 40, 5067, 5068, 5069, 5070, 5071, 5072, 5073, 5074, 5115,
-                            5116, 5117, 5118, 5119, 5120, 5157, 5184, 5049, 5050, 0, 423
+                            5116, 5117, 5118, 5119, 5120, 5157, 5184, 5049, 5050, 5201, 5202, 5203, 0, 423,5205
                     }
             );
         }
@@ -131,6 +131,38 @@ public class MDIncRefresh extends Message {
         public NoMDEntries setVolume(double volume) {
             setDouble(FIELD_MD_ENTRY_SIZE, volume);
             return this;
+        }
+
+        public NoMDEntries setAveragePrice(double price) {
+            setDouble(FIELD_AVERAGE_PRC, price);
+            return this;
+        }
+
+        public NoMDEntries setAveragePricePrev(double price) {
+            setDouble(FIELD_AVG_PRC_PREV, price);
+            return this;
+        }
+
+        public NoMDEntries setOpenedPos(double pos) {
+            setDouble(FIELD_OPENED_POS, pos);
+            return this;
+        }
+
+        public NoMDEntries setLastDealDate(Date date) {
+            setUtcTimeStamp(FIELD_LAST_DEAL_DATE, date);
+            return this;
+        }
+
+        public double getAveragePrice(double price) {
+            return getDouble(FIELD_AVERAGE_PRC);
+        }
+
+        public double getAveragePricePrev(double price) {
+            return getDouble(FIELD_AVG_PRC_PREV);
+        }
+
+        public double getOpenedPos(double pos) {
+            return getDouble(FIELD_OPENED_POS);
         }
 
         public Date getTradeSessionOpenTime() {
@@ -215,6 +247,11 @@ public class MDIncRefresh extends Message {
 
         public NoMDEntries setLastPx(double lastPrice) {
             setDouble(FIELD_LAST_PX, lastPrice);
+            return this;
+        }
+
+        public NoMDEntries setLastQty(double lastQty) {
+            setDouble(FIELD_LAST_QTY, lastQty);
             return this;
         }
 

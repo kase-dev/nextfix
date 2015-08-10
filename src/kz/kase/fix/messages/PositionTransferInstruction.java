@@ -6,22 +6,28 @@ import quickfix.Group;
 import quickfix.Message;
 import quickfix.field.StringField;
 
-import java.util.Date;
-
 import static kz.kase.fix.FixProtocol.*;
 
 public class PositionTransferInstruction extends Message {
 
     public PositionTransferInstruction() {
-        this(false);
-    }
-
-    public PositionTransferInstruction(boolean parse) {
         super();
         getHeader().setString(FIELD_MESSAGE_TYPE, MESSAGE_POS_TRANSFER_INSTRUCTION);
-        /*if (!parse) {
-            setUtcTimeStamp(FIELD_TRANSACTION_TIME, new Date());
-        }*/
+    }
+
+
+    public PositionTransferInstruction setFromAccount(String acc) {
+        setString(FIELD_ACCOUNT, acc);
+        return this;
+    }
+
+    public String getFromAccount() {
+        return getString(FIELD_ACCOUNT);
+    }
+
+    public PositionTransferInstruction setToAccount(String account) {
+        setString(FIELD_TRANSFER_INSTRUCTION_ID, account);
+        return this;
     }
 
     public PositionTransferInstruction setRef(long ref) {
@@ -38,8 +44,42 @@ public class PositionTransferInstruction extends Message {
         return this;
     }
 
-    public String getSymbol(){
+    public String getToAccount() {
+        return getString(FIELD_TRANSFER_INSTRUCTION_ID);
+    }
+
+    public String getSymbol() {
         return getString(FIELD_SYMBOL);
+    }
+
+
+    public static class PositionQty extends Group {
+        public PositionQty() {
+            super(FixProtocol.FIELD_NO_POSITIONS, FixProtocol.FIELD_POSITION_TYPE,
+                    new int[]{
+                            703, 704
+                    }
+            );
+        }
+
+        public PositionQty setPosType(String posType) {
+            setString(FixProtocol.FIELD_POSITION_TYPE, posType);
+            return this;
+        }
+
+        public String getPosType() {
+            return getString(FixProtocol.FIELD_POSITION_TYPE);
+        }
+
+        public PositionQty setLongQty(Double pos) {
+            setDouble(FixProtocol.FIELD_LONG_QTY, pos);
+            return this;
+        }
+
+        public Double getLongQty() {
+            return getDouble(FixProtocol.FIELD_LONG_QTY);
+        }
+
     }
 
     public PositionTransferInstruction setCurrency(String currency) {
@@ -47,7 +87,7 @@ public class PositionTransferInstruction extends Message {
         return this;
     }
 
-    public String getCurrency(){
+    public String getCurrency() {
         return getString(FIELD_CURRENCY);
     }
 

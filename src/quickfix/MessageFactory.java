@@ -23,7 +23,7 @@ package quickfix;
 /**
  * Used by a Session to create a Message.
  * 
- * @see Session
+ * @see quickfix.Session
  */
 public interface MessageFactory {
     /**

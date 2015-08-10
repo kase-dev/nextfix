@@ -28,7 +28,7 @@ import quickfix.SessionID;
  * A Log using the SLFJ wrapper that supports JDK 1.4 logging, Log4J and others. This log should be created using the
  * associated factory.
  *
- * @see quickfix.logging.SLF4JLogFactory
+ * @see SLF4JLogFactory
  */
 public class SLF4JLog extends AbstractLog {
 
@@ -131,7 +131,7 @@ public class SLF4JLog extends AbstractLog {
     }
 
     /** Made protected to enable unit testing of callerFQCN coming through correctly */
-    protected void log(Logger log, String text) {
+    protected void log(org.slf4j.Logger log, String text) {
         if (log.isInfoEnabled()) {
             final String message = logPrefix != null ? (logPrefix + text) : text;
             if (log instanceof LocationAwareLogger) {
@@ -143,7 +143,7 @@ public class SLF4JLog extends AbstractLog {
         }
     }
 
-    protected void logError(Logger log, String text) {
+    protected void logError(org.slf4j.Logger log, String text) {
         final String message = logPrefix != null ? (logPrefix + text) : text;
         log.error(message);
     }

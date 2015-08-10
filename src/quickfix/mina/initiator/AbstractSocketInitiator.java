@@ -19,39 +19,24 @@
 
 package quickfix.mina.initiator;
 
-import java.net.InetSocketAddress;
-import java.net.SocketAddress;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.Set;
-
-//import org.apache.mina.common.ByteBuffer;
-//import org.apache.mina.common.SimpleByteBufferAllocator;
-//import org.apache.mina.common.TransportType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import quickfix.Application;
-import quickfix.ConfigError;
-import quickfix.DefaultSessionFactory;
-import quickfix.FieldConvertError;
-import quickfix.Initiator;
-import quickfix.logging.LogFactory;
-import quickfix.MessageFactory;
-import quickfix.store.MessageStoreFactory;
-import quickfix.Session;
-import quickfix.SessionFactory;
-import quickfix.SessionID;
-import quickfix.SessionSettings;
+import quickfix.*;
 import quickfix.field.converter.BooleanConverter;
+import quickfix.logging.LogFactory;
 import quickfix.mina.EventHandlingStrategy;
 import quickfix.mina.NetworkingOptions;
 import quickfix.mina.SessionConnector;
 import quickfix.mina.ssl.SSLSupport;
+import quickfix.store.MessageStoreFactory;
+
+import java.net.InetSocketAddress;
+import java.net.SocketAddress;
+import java.util.*;
+
+//import org.apache.mina.common.ByteBuffer;
+//import org.apache.mina.common.SimpleByteBufferAllocator;
+//import org.apache.mina.common.TransportType;
 
 /**
  * Abstract base class for socket initiators.
@@ -62,8 +47,8 @@ public abstract class AbstractSocketInitiator extends SessionConnector implement
     private final Set<IoSessionInitiator> initiators = new HashSet<IoSessionInitiator>();
 
     protected AbstractSocketInitiator(Application application,
-            MessageStoreFactory messageStoreFactory, SessionSettings settings,
-            LogFactory logFactory, MessageFactory messageFactory) throws ConfigError {
+                                      MessageStoreFactory messageStoreFactory, SessionSettings settings,
+                                      LogFactory logFactory, MessageFactory messageFactory) throws ConfigError {
         this(settings, new DefaultSessionFactory(application, messageStoreFactory, logFactory,
                 messageFactory));
     }
@@ -88,7 +73,7 @@ public abstract class AbstractSocketInitiator extends SessionConnector implement
                 if (socketAddresses.length == 0) {
                     throw new ConfigError("Must specify at least one socket address");
                 }
-                
+
                 SocketAddress localAddress = getLocalAddress(settings, sessionID);
 
                 final NetworkingOptions networkingOptions = new NetworkingOptions(getSettings()
@@ -154,7 +139,7 @@ public abstract class AbstractSocketInitiator extends SessionConnector implement
         }
 
         final Map<SessionID, Session> initiatorSessions = new HashMap<>();
-        for (final Iterator<SessionID> i = settings.sectionIterator(); i.hasNext();) {
+        for (final Iterator<SessionID> i = settings.sectionIterator(); i.hasNext(); ) {
             final SessionID sessionID = i.next();
             if (isInitiatorSession(sessionID)) {
                 try {
@@ -190,13 +175,13 @@ public abstract class AbstractSocketInitiator extends SessionConnector implement
                 throw new ConfigError(e);
             }
         }
-        return new int[] { 30 };
+        return new int[]{30};
     }
 
     private SocketAddress[] getSocketAddresses(SessionID sessionID) throws ConfigError {
         final SessionSettings settings = getSettings();
         final ArrayList<SocketAddress> addresses = new ArrayList<>();
-        for (int index = 0;; index++) {
+        for (int index = 0; ; index++) {
             try {
                 final String hostKey = Initiator.SETTING_SOCKET_CONNECT_HOST
                         + (index == 0 ? "" : Integer.toString(index));
@@ -223,7 +208,7 @@ public abstract class AbstractSocketInitiator extends SessionConnector implement
         final SessionSettings settings = getSettings();
         return !settings.isSetting((SessionID) sectionKey, SessionFactory.SETTING_CONNECTION_TYPE)
                 || settings.getString((SessionID) sectionKey,
-                        SessionFactory.SETTING_CONNECTION_TYPE).equals("initiator");
+                SessionFactory.SETTING_CONNECTION_TYPE).equals("initiator");
     }
 
     protected void startInitiators() {
@@ -241,7 +226,7 @@ public abstract class AbstractSocketInitiator extends SessionConnector implement
     }
 
     public Set<IoSessionInitiator> getInitiators() {
-        return Collections.unmodifiableSet(initiators);
+        return initiators   ;
     }
 
     public int getQueueSize() {
@@ -249,5 +234,5 @@ public abstract class AbstractSocketInitiator extends SessionConnector implement
         return ehs == null ? 0 : ehs.getQueueSize();
     }
 
-    protected abstract EventHandlingStrategy getEventHandlingStrategy() ;
+    protected abstract EventHandlingStrategy getEventHandlingStrategy();
 }
